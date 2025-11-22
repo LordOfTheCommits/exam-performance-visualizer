@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,407 +21,556 @@
       animation: welcomeFadeIn 0.5s ease-out both;
       overflow: hidden;
     }
-    .stone-hero { position: relative; width: 100%; height: 100%; }
+
+    .stone-hero {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
     .stone-bg {
-      width: 100%; height: 100%; object-fit: cover;
-      transform: scale(1.05); filter: saturate(1.05) brightness(0.95);
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scale(1.05);
+      filter: saturate(1.05) brightness(0.95);
       opacity: 0.85;
       animation: stoneZoom 5s ease-out forwards;
     }
+
     .stone-btn {
-      position: absolute; bottom: 12%; left: 50%;
+      position: absolute;
+      bottom: 12%;
+      left: 50%;
       transform: translateX(-50%);
-      padding: 9px 26px; border-radius: 999px; border: none;
+      padding: 9px 26px;
+      border-radius: 999px;
+      border: none;
       background: linear-gradient(135deg, #22c55e, #0ea5e9);
-      color: #f9fafb; font-size: 0.9rem;
-      letter-spacing: 0.08em; text-transform: uppercase;
+      color: #f9fafb;
+      font-size: 0.9rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
       cursor: pointer;
-      box-shadow: 0 18px 50px rgba(0,0,0,0.95);
+      box-shadow: 0 18px 50px rgba(0, 0, 0, 0.95);
       transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
     }
+
     .stone-btn:hover {
       transform: translateX(-50%) translateY(-3px);
       background: linear-gradient(135deg, #4ade80, #38bdf8);
-      box-shadow: 0 24px 80px rgba(0,0,0,1);
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 1);
     }
+
     @keyframes stoneZoom {
-      from { transform: scale(1.12); opacity: 0.5; }
-      to   { transform: scale(1.0);  opacity: 1;   }
+      from {
+        transform: scale(1.12);
+        opacity: 0.5;
+      }
+
+      to {
+        transform: scale(1.0);
+        opacity: 1;
+      }
     }
-    @keyframes welcomeFadeIn { from {opacity:0;} to {opacity:1;} }
-    #welcome-overlay.fade-out { animation: welcomeFadeOut 0.5s ease-in forwards; }
-    @keyframes welcomeFadeOut { to {opacity:0;visibility:hidden;} }
+
+    @keyframes welcomeFadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    #welcome-overlay.fade-out {
+      animation: welcomeFadeOut 0.5s ease-in forwards;
+    }
+
+    @keyframes welcomeFadeOut {
+      to {
+        opacity: 0;
+        visibility: hidden;
+      }
+    }
 
     :root {
       --bg1: #020617;
       --bg2: #020617;
-      --bg3: #000000;
-      --card: rgba(15,23,42,0.95);
+      --bg3: #050000;
+      --card: rgba(3, 2, 52, 0.95);
       --muted: #e5e7eb;
-      --accent1: #0ea5e9;
+      --accent1: #1ecaca;
       --accent2: #22c55e;
       --accent3: #eab308;
-      --border-soft: rgba(148,163,184,0.6);
+      --border-soft: rgba(148, 163, 184, 0.6);
       --text: #f9fafb;
     }
-    *{
-      box-sizing:border-box;
-      margin:0;
-      padding:0;
-      font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif
-    }
-    html,body{height:100%}
-    body{
-      min-height:100vh;
-      display:flex;
-      flex-direction:column;
-      color:var(--text);
-      background:
-        radial-gradient(circle at top left, rgba(56,189,248,0.08), transparent 55%),
-        radial-gradient(circle at top right, rgba(34,197,94,0.08), transparent 55%),
-        radial-gradient(circle at bottom, rgba(15,23,42,0.9), #020617 70%, #000 100%);
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif
     }
 
-    header{
-      padding:20px 30px;
-      background:linear-gradient(120deg,rgba(15,23,42,0.95),rgba(37,99,235,0.9));
-      border-bottom:1px solid rgba(148,163,184,0.5);
-      box-shadow:0 18px 60px rgba(15,23,42,0.9);
-      border-radius:0 0 18px 18px;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:16px;
-      flex-wrap:wrap;
+    html,
+    body {
+      height: 100%
     }
-    header h1{
-      font-size:2.3rem;
-      font-weight:800;
-      text-transform:uppercase;
-      color:#e5e7eb;
-      letter-spacing:0.18em;
-      font-family:"Algerian", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(56, 189, 248, 0.08), transparent 55%),
+        radial-gradient(circle at top right, rgba(34, 197, 94, 0.08), transparent 55%),
+        radial-gradient(circle at bottom, rgba(15, 23, 42, 0.9), #020617 70%, #000 100%);
+    }
+
+    header {
+      padding: 20px 30px;
+      background: linear-gradient(120deg, rgb(0, 0, 94), rgb(56, 142, 255));
+      border-bottom: 1px solid rgba(148, 163, 184, 0.5);
+      box-shadow: 0 18px 60px rgba(15, 23, 42, 0.9);
+      border-radius: 0 0 18px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    header h1 {
+      font-size: 2.3rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: #e5e7eb;
+      letter-spacing: 0.18em;
+      font-family: "Algerian", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
 
     /* NEW: all other headings use Algerian too */
-    h2, h3, h4, h5, h6 {
-      font-family:"Algerian", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-family: "Algerian", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
 
-    header p{
-      font-size:.78rem;
-      color:#cbd5f5;
-      margin-top:4px
-    }
-    header .badge{
-      font-size:.75rem;
-      padding:5px 12px;
-      border-radius:999px;
-      border:1px solid rgba(248,250,252,0.8);
-      text-transform:uppercase;
-      letter-spacing:.09em;
-      color:#e5e7eb;
-      background:rgba(15,23,42,0.85);
+    header p {
+      font-size: .78rem;
+      color: #cbd5f5;
+      margin-top: 4px
     }
 
-    main{
-      flex:1;
-      display:grid;
-      grid-template-columns:minmax(280px,459px) minmax(0,1fr);
-      gap:18px;
-      padding:18px;
-    }
-    @media(max-width:900px){main{grid-template-columns:1fr}}
-
-    .card{
-      position:relative;
-      background:var(--card);
-      border-radius:18px;
-      border:1px solid var(--border-soft);
-      box-shadow:0 24px 60px rgba(15,23,42,0.95);
-      padding:14px 16px;
-      display:flex;
-      flex-direction:column;
-      gap:8px;
-      overflow:hidden;
-    }
-    .card::before{
-      content:"";
-      position:absolute;
-      inset:-1px;
-      border-radius:inherit;
-      background:conic-gradient(from 200deg at 0% 0%,rgba(56,189,248,0.4),rgba(34,197,94,0.35),transparent,transparent);
-      opacity:0;
-      transition:opacity 0.35s;
-      z-index:-1;
-    }
-    .card:hover::before{opacity:0.8;}
-    .card h2{
-      font-size:1rem;
-      font-weight:600;
-      color:#f9fafb;
-    }
-    .card p.sub{
-      font-size:.8rem;
-      color:#e5e7eb;
+    header .badge {
+      font-size: .75rem;
+      padding: 5px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(248, 250, 252, 0.8);
+      text-transform: uppercase;
+      letter-spacing: .09em;
+      color: #e5e7eb;
+      background: rgba(15, 23, 42, 0.85);
     }
 
-    label{
-      display:block;
-      font-size:.8rem;
-      margin-bottom:4px;
-      color:#e5e7eb;
-    }
-    input,select,textarea{
-      width:100%;
-      padding:7px 9px;
-      border-radius:10px;
-      border:1px solid rgba(51,65,85,0.9);
-      background:rgba(15,23,42,0.98);
-      color:#e5e7eb;
-      font-size:.8rem;
-      outline:none;
-      transition:border-color .18s,box-shadow .18s,transform .08s,background .18s;
-    }
-    input:focus,select:focus,textarea:focus{
-      border-color:#38bdf8;
-      box-shadow:0 0 0 1px rgba(56,189,248,0.9),0 0 18px rgba(56,189,248,0.35);
-      transform:translateY(-1px);
-      background:rgba(15,23,42,1);
+    main {
+      flex: 1;
+      display: grid;
+      grid-template-columns: minmax(280px, 459px) minmax(0, 1fr);
+      gap: 18px;
+      padding: 18px;
     }
 
-    .form-row{
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:6px;
-      margin-bottom:8px;
-      align-items:end;
-    }
-    @media(max-width:520px){.form-row{grid-template-columns:1fr 1fr}}
-
-    .btn{
-      padding:8px 12px;
-      border-radius:999px;
-      border:none;
-      cursor:pointer;
-      font-size:.8rem;
-      font-weight:500;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:6px;
-      background:rgba(15,23,42,0.9);
-      color:#e5e7eb;
-      border:1px solid rgba(148,163,184,0.7);
-      transition:background .18s,transform .08s,box-shadow .18s,border-color .18s;
-      user-select:none;
-    }
-    .btn:hover{
-      background:rgba(37,99,235,0.9);
-      border-color:rgba(191,219,254,0.95);
-      box-shadow:0 10px 26px rgba(15,23,42,0.95);
-      transform:translateY(-1px);
-    }
-    .btn-primary{
-      background:linear-gradient(135deg,#22c55e,#0ea5e9);
-      color:#fefce8;
-      border:none;
-      box-shadow:0 12px 30px rgba(34,197,94,0.7);
-    }
-    .btn-primary:hover{
-      background:linear-gradient(135deg,#4ade80,#38bdf8);
-      box-shadow:0 18px 40px rgba(34,197,94,0.9);
-    }
-    .btn-thin{padding-top:4px;padding-bottom:4px;}
-
-    .btn-profile{
-      padding:6px 10px;
-      border-radius:999px;
-      border:1px solid rgba(148,163,184,0.9);
-      background:rgba(15,23,42,0.95);
-      font-size:.78rem;
-      font-weight:600;
-      color:#e5e7eb;
-      cursor:pointer;
-      transition:background .18s,border-color .18s,transform .08s;
-    }
-    .btn-profile:hover{
-      background:rgba(30,64,175,0.95);
-      border-color:rgba(191,219,254,0.95);
-      transform:translateY(-1px);
-    }
-    .btn-profile.active{
-      background:linear-gradient(90deg,#22c55e,#0ea5e9);
-      color:#020617;
-      border:none;
+    @media(max-width:900px) {
+      main {
+        grid-template-columns: 1fr
+      }
     }
 
-    .profiles-bar{display:flex;gap:6px;flex-wrap:wrap;max-width:260px}
-    .muted-small{font-size:.75rem;color:#9ca3af}
-    .divider{
-      height:1px;
-      margin:8px 0;
-      background:linear-gradient(90deg,transparent,rgba(148,163,184,0.7),transparent);
+    .card {
+      position: relative;
+      background: var(--card);
+      border-radius: 18px;
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 24px 60px rgba(15, 23, 42, 0.95);
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      overflow: hidden;
     }
 
-    .table{width:100%;border-collapse:collapse;font-size:.8rem;margin-top:4px;}
-    .table th,.table td{
-      border-bottom:1px solid rgba(31,41,55,0.95);
-      padding:4px 0;
-      text-align:left;
-      color:#e5e7eb;
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      border-radius: inherit;
+      background: conic-gradient(from 200deg at 0% 0%, rgba(56, 189, 248, 0.4), rgba(34, 197, 94, 0.35), transparent, transparent);
+      opacity: 0;
+      transition: opacity 0.35s;
+      z-index: -1;
     }
-    .table th{color:#9ca3af;font-weight:500}
 
-    .pill-weak,.pill-strong,.pill-avg{
-      padding:2px 7px;
-      border-radius:999px;
-      font-size:.7rem;
-      display:inline-block;
+    .card:hover::before {
+      opacity: 0.8;
     }
-    .pill-weak{
-      background:rgba(248,113,113,0.25);
-      color:#fecaca;
-      border:1px solid rgba(248,113,113,0.95);
-    }
-    .pill-strong{
-      background:rgba(22,163,74,0.25);
-      color:#bbf7d0;
-      border:1px solid rgba(22,163,74,0.95);
-    }
-    .pill-avg{
-      background:rgba(251,191,36,0.2);
-      color:#fef3c7;
-      border:1px solid rgba(251,191,36,0.9);
-    }
-    .row-actions{display:flex;gap:4px}
 
-    .stats-row{
-      display:grid;
-      grid-template-columns:repeat(3,minmax(0,1fr));
-      gap:10px;
-      margin-top:4px;
+    .card h2 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #f9fafb;
     }
-    .stat-box{
-      padding:8px;
-      border-radius:10px;
-      border:1px solid rgba(148,163,184,0.7);
-      background:radial-gradient(circle at top,rgba(15,23,42,1),rgba(15,23,42,0.95));
-    }
-    .stat-label{font-size:.7rem;color:#9ca3af;margin-bottom:2px}
-    .stat-value{font-size:1rem;font-weight:600;color:#f9fafb}
-    .stat-sub{font-size:.7rem;color:#6b7280}
 
-    .charts-grid{
-      display:grid;
-      grid-template-columns:minmax(0,1fr) minmax(0,1fr);
-      gap:12px;
-      margin-top:6px;
+    .card p.sub {
+      font-size: .8rem;
+      color: #e5e7eb;
     }
-    @media(max-width:1100px){.charts-grid{grid-template-columns:1fr}}
 
-    .chart-card{
-      background:radial-gradient(circle at top left,rgba(37,99,235,0.32),#020617);
-      border-radius:16px;
-      border:1px solid rgba(59,130,246,0.9);
-      padding:10px;
-      min-height:220px;
-      position:relative;
-      overflow:hidden;
+    label {
+      display: block;
+      font-size: .8rem;
+      margin-bottom: 4px;
+      color: #e5e7eb;
     }
-    .chart-card.alt{
-      background:radial-gradient(circle at top,rgba(34,197,94,0.32),#020617);
-      border-color:rgba(34,197,94,0.9);
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 7px 9px;
+      border-radius: 10px;
+      border: 1px solid rgba(51, 65, 85, 0.9);
+      background: rgba(15, 23, 42, 0.98);
+      color: #e5e7eb;
+      font-size: .8rem;
+      outline: none;
+      transition: border-color .18s, box-shadow .18s, transform .08s, background .18s;
     }
-    .chart-title{
-      font-size:1.05rem;
-      font-weight:700;
-      letter-spacing:.04em;
-      text-transform:uppercase;
-      margin-bottom:6px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      color:#f9fafb;
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: #38bdf8;
+      box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.9), 0 0 18px rgba(56, 189, 248, 0.35);
+      transform: translateY(-1px);
+      background: rgba(15, 23, 42, 1);
     }
-    .chart-sub{font-size:.8rem;color:#cbd5f5}
-    .hint{font-size:.8rem;color:#9ca3af;margin-top:4px}
+
+    .form-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      margin-bottom: 8px;
+      align-items: end;
+    }
+
+    @media(max-width:520px) {
+      .form-row {
+        grid-template-columns: 1fr 1fr
+      }
+    }
+
+    .btn {
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      font-size: .8rem;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      background: rgba(15, 23, 42, 0.9);
+      color: #e5e7eb;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      transition: background .18s, transform .08s, box-shadow .18s, border-color .18s;
+      user-select: none;
+    }
+
+    .btn:hover {
+      background: rgba(37, 99, 235, 0.9);
+      border-color: rgba(191, 219, 254, 0.95);
+      box-shadow: 0 10px 26px rgba(15, 23, 42, 0.95);
+      transform: translateY(-1px);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #22c55e, #0ea5e9);
+      color: #fefce8;
+      border: none;
+      box-shadow: 0 12px 30px rgba(34, 197, 94, 0.7);
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #4ade80, #38bdf8);
+      box-shadow: 0 18px 40px rgba(34, 197, 94, 0.9);
+    }
+
+    .btn-thin {
+      padding-top: 4px;
+      padding-bottom: 4px;
+    }
+
+    .btn-profile {
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.9);
+      background: rgba(15, 23, 42, 0.95);
+      font-size: .78rem;
+      font-weight: 600;
+      color: #e5e7eb;
+      cursor: pointer;
+      transition: background .18s, border-color .18s, transform .08s;
+    }
+
+    .btn-profile:hover {
+      background: rgba(30, 64, 175, 0.95);
+      border-color: rgba(191, 219, 254, 0.95);
+      transform: translateY(-1px);
+    }
+
+    .btn-profile.active {
+      background: linear-gradient(90deg, #22c55e, #0ea5e9);
+      color: #020617;
+      border: none;
+    }
+
+    .profiles-bar {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      max-width: 260px
+    }
+
+    .muted-small {
+      font-size: .75rem;
+      color: #9ca3af
+    }
+
+    .divider {
+      height: 1px;
+      margin: 8px 0;
+      background: linear-gradient(90deg, transparent, rgba(148, 163, 184, 0.7), transparent);
+    }
+
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .8rem;
+      margin-top: 4px;
+    }
+
+    .table th,
+    .table td {
+      border-bottom: 1px solid rgba(31, 41, 55, 0.95);
+      padding: 4px 0;
+      text-align: left;
+      color: #e5e7eb;
+    }
+
+    .table th {
+      color: #9ca3af;
+      font-weight: 500
+    }
+
+    .pill-weak,
+    .pill-strong,
+    .pill-avg {
+      padding: 2px 7px;
+      border-radius: 999px;
+      font-size: .7rem;
+      display: inline-block;
+    }
+
+    .pill-weak {
+      background: rgba(248, 113, 113, 0.25);
+      color: #fecaca;
+      border: 1px solid rgba(248, 113, 113, 0.95);
+    }
+
+    .pill-strong {
+      background: rgba(22, 163, 74, 0.25);
+      color: #bbf7d0;
+      border: 1px solid rgba(22, 163, 74, 0.95);
+    }
+
+    .pill-avg {
+      background: rgba(251, 191, 36, 0.2);
+      color: #fef3c7;
+      border: 1px solid rgba(251, 191, 36, 0.9);
+    }
+
+    .row-actions {
+      display: flex;
+      gap: 4px
+    }
+
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    .stat-box {
+      padding: 8px;
+      border-radius: 10px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      background: radial-gradient(circle at top, rgba(15, 23, 42, 1), rgba(15, 23, 42, 0.95));
+    }
+
+    .stat-label {
+      font-size: .7rem;
+      color: #9ca3af;
+      margin-bottom: 2px
+    }
+
+    .stat-value {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #f9fafb
+    }
+
+    .stat-sub {
+      font-size: .7rem;
+      color: #6b7280
+    }
+
+    .charts-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 12px;
+      margin-top: 6px;
+    }
+
+    @media(max-width:1100px) {
+      .charts-grid {
+        grid-template-columns: 1fr
+      }
+    }
+
+    .chart-card {
+      background: radial-gradient(circle at top left, rgba(37, 99, 235, 0.32), #020617);
+      border-radius: 16px;
+      border: 1px solid rgba(59, 130, 246, 0.9);
+      padding: 10px;
+      min-height: 220px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .chart-card.alt {
+      background: radial-gradient(circle at top, rgba(34, 197, 94, 0.32), #020617);
+      border-color: rgba(34, 197, 94, 0.9);
+    }
+
+    .chart-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: #f9fafb;
+    }
+
+    .chart-sub {
+      font-size: .8rem;
+      color: #cbd5f5
+    }
+
+    .hint {
+      font-size: .8rem;
+      color: #9ca3af;
+      margin-top: 4px
+    }
 
     /* Footer font different from headings */
-    footer{
-      padding:8px 16px 14px;
-      font-size:.7rem;
-      color:#9ca3af;
-      border-top:1px solid rgba(17,24,39,0.9);
-      text-align:right;
-      background:rgba(15,23,42,1);
-      font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    footer {
+      padding: 8px 16px 14px;
+      font-size: .7rem;
+      color: #9ca3af;
+      border-top: 1px solid rgba(17, 24, 39, 0.9);
+      text-align: right;
+      background: rgba(15, 23, 42, 1);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
 
-    #topicPieChart{
-      max-width:200px!important;
-      max-height:200px!important;
-      width:200px!important;
-      height:200px!important;
-      margin:auto;
-      display:block;
+    #topicPieChart {
+      max-width: 200px !important;
+      max-height: 200px !important;
+      width: 200px !important;
+      height: 200px !important;
+      margin: auto;
+      display: block;
     }
 
-    .heatmap{
-      display:grid;
-      grid-template-columns:repeat(6,1fr);
-      gap:6px
-    }
-    .hm-cell{
-      height:26px;
-      border-radius:6px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-size:.8rem;
-      font-weight:600;
-      color:#f9fafb;
-      background:rgba(15,23,42,0.98);
-      border:1px solid rgba(75,85,99,0.9);
-      user-select:none;
-      cursor:default;
+    .heatmap {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 6px
     }
 
-    .study-row{
-      display:flex;
-      justify-content:space-between;
-      padding:4px 0;
-      font-size:.8rem;
+    .hm-cell {
+      height: 26px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .8rem;
+      font-weight: 600;
+      color: #f9fafb;
+      background: rgba(15, 23, 42, 0.98);
+      border: 1px solid rgba(75, 85, 99, 0.9);
+      user-select: none;
+      cursor: default;
     }
 
-    .toast{
-      position:fixed;
-      right:18px;
-      bottom:18px;
-      padding:10px 14px;
-      border-radius:10px;
-      background:rgba(15,23,42,0.98);
-      color:#e5e7eb;
-      font-weight:600;
-      font-size:.9rem;
-      user-select:none;
-      pointer-events:none;
-      opacity:0;
-      transition:opacity .3s,transform .2s;
-      z-index:9999;
-      transform:translateY(10px);
-    }
-    .toast.show{
-      opacity:1;
-      pointer-events:auto;
-      transform:translateY(0)
+    .study-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 4px 0;
+      font-size: .8rem;
     }
 
-    .gauge-wrap{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      margin-top:6px;
+    .toast {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      padding: 10px 14px;
+      border-radius: 10px;
+      background: rgba(15, 23, 42, 0.98);
+      color: #e5e7eb;
+      font-weight: 600;
+      font-size: .9rem;
+      user-select: none;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity .3s, transform .2s;
+      z-index: 9999;
+      transform: translateY(10px);
+    }
+
+    .toast.show {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0)
+    }
+
+    .gauge-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 6px;
     }
   </style>
 </head>
@@ -508,7 +658,8 @@
         </div>
 
         <div class="form-row" style="margin-top:-4px;">
-          <div></div><div></div>
+          <div></div>
+          <div></div>
           <div>
             <button type="submit" class="btn btn-primary btn-thin" style="width:100%;">Add marks</button>
           </div>
@@ -540,7 +691,8 @@
 
       <div class="divider"></div>
 
-      <div class="card" style="padding:6px 8px;box-shadow:none;border-color:rgba(148,163,184,0.7);background:rgba(15,23,42,0.98);">
+      <div class="card"
+        style="padding:6px 8px;box-shadow:none;border-color:rgba(148,163,184,0.7);background:rgba(15,23,42,0.98);">
         <div class="muted-small" style="margin-bottom:4px;">Profiles</div>
         <div id="profilesContainer" class="profiles-bar"></div>
         <button class="btn" id="addProfileBtn" style="margin-top:3px;">+ Profile</button>
@@ -712,507 +864,517 @@
 
     const topicOptions = {
       'Class 6': {
-        'Maths': ['Knowing Our Numbers','Whole Numbers','Playing with Numbers','Basic Geometry'],
-        'Science': ['Food & Components','Sorting Materials','Fibre to Fabric','Changes Around Us'],
-        'English': ['Prose – Stories','Poems – Basic'],
-        'Social Science': ['History – Early Humans','Geography – Earth in the Solar System']
+        'Maths': ['Knowing Our Numbers', 'Whole Numbers', 'Playing with Numbers', 'Basic Geometry'],
+        'Science': ['Food & Components', 'Sorting Materials', 'Fibre to Fabric', 'Changes Around Us'],
+        'English': ['Prose – Stories', 'Poems – Basic'],
+        'Social Science': ['History – Early Humans', 'Geography – Earth in the Solar System']
       },
       'Class 7': {
-        'Maths': ['Integers','Fractions','Decimals'],
-        'Science': ['Nutrition in Plants','Acids Bases Salts'],
-        'English': ['Prose – Stories','Poems'],
-        'Social Science': ['Medieval History','Environment']
+        'Maths': ['Integers', 'Fractions', 'Decimals'],
+        'Science': ['Nutrition in Plants', 'Acids Bases Salts'],
+        'English': ['Prose – Stories', 'Poems'],
+        'Social Science': ['Medieval History', 'Environment']
       },
       'Class 8': {
-        'Maths': ['Rational Numbers','Linear Equations in One Variable','Squares and Square Roots'],
-        'Science': ['Crop Production','Synthetic Fibres and Plastics'],
-        'English': ['Prose','Poetry'],
-        'Social Science': ['Modern History','Resources']
+        'Maths': ['Rational Numbers', 'Linear Equations in One Variable', 'Squares and Square Roots'],
+        'Science': ['Crop Production', 'Synthetic Fibres and Plastics'],
+        'English': ['Prose', 'Poetry'],
+        'Social Science': ['Modern History', 'Resources']
       },
       'Class 9': {
-        'Maths': ['Number Systems','Polynomials','Coordinate Geometry'],
-        'Science': ['Matter in Our Surroundings','Is Matter Around Us Pure'],
-        'English': ['Beehive – Prose','Moments – Supplementary'],
-        'Social Science': ['French Revolution','India – Size and Location']
+        'Maths': ['Number Systems', 'Polynomials', 'Coordinate Geometry'],
+        'Science': ['Matter in Our Surroundings', 'Is Matter Around Us Pure'],
+        'English': ['Beehive – Prose', 'Moments – Supplementary'],
+        'Social Science': ['French Revolution', 'India – Size and Location']
       },
       'Class 10': {
-        'Maths': ['Real Numbers','Polynomials','Pair of Linear Equations','Quadratic Equations'],
-        'Science': ['Chemical Reactions','Acids Bases Salts','Life Processes'],
-        'English': ['First Flight – Prose','Poems','Footprints Without Feet'],
-        'Social Science': ['Nationalism in Europe','Resources and Development']
+        'Maths': ['Real Numbers', 'Polynomials', 'Pair of Linear Equations', 'Quadratic Equations'],
+        'Science': ['Chemical Reactions', 'Acids Bases Salts', 'Life Processes'],
+        'English': ['First Flight – Prose', 'Poems', 'Footprints Without Feet'],
+        'Social Science': ['Nationalism in Europe', 'Resources and Development']
       },
       'Class 11': {
-        'Maths': ['Sets','Relations & Functions','Trigonometric Functions'],
-        'Science': ['Physical World','Units & Measurements'],
-        'English': ['Hornbill – Prose','Poems'],
-        'Social Science': ['Indian Constitution','Economic Planning']
+        'Maths': ['Sets', 'Relations & Functions', 'Trigonometric Functions'],
+        'Science': ['Physical World', 'Units & Measurements'],
+        'English': ['Hornbill – Prose', 'Poems'],
+        'Social Science': ['Indian Constitution', 'Economic Planning']
       },
       'Class 12': {
-        'Maths': ['Relations and Functions','Matrices','Continuity & Differentiability'],
-        'Science': ['Electrostatics','Current Electricity','Organic Chemistry'],
-        'English': ['Flamingo – Prose','Poetry'],
-        'Social Science': ['Macroeconomics','Politics of India']
+        'Maths': ['Relations and Functions', 'Matrices', 'Continuity & Differentiability'],
+        'Science': ['Electrostatics', 'Current Electricity', 'Organic Chemistry'],
+        'English': ['Flamingo – Prose', 'Poetry'],
+        'Social Science': ['Macroeconomics', 'Politics of India']
       }
     };
 
-    function uid(prefix){return prefix+Math.random().toString(36).slice(2,9);}
-    function toast(msg,timeout=2200){
-      const t=document.getElementById('toast');if(!t)return;
-      t.textContent=msg;t.classList.add('show');
+    function uid(prefix) { return prefix + Math.random().toString(36).slice(2, 9); }
+    function toast(msg, timeout = 2200) {
+      const t = document.getElementById('toast'); if (!t) return;
+      t.textContent = msg; t.classList.add('show');
       clearTimeout(t.timeout);
-      t.timeout=setTimeout(()=>t.classList.remove('show'),timeout);
+      t.timeout = setTimeout(() => t.classList.remove('show'), timeout);
     }
-    function saveState(){
-      localStorage.setItem(STORAGE_KEY,JSON.stringify({profiles,activeProfileId}));
+    function saveState() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({ profiles, activeProfileId }));
     }
-    function loadState(){
-      const raw=localStorage.getItem(STORAGE_KEY);if(!raw)return;
-      try{
-        const parsed=JSON.parse(raw);
-        profiles=parsed.profiles||{};
-        activeProfileId=parsed.activeProfileId||null;
-      }catch(e){console.error(e);}
+    function loadState() {
+      const raw = localStorage.getItem(STORAGE_KEY); if (!raw) return;
+      try {
+        const parsed = JSON.parse(raw);
+        profiles = parsed.profiles || {};
+        activeProfileId = parsed.activeProfileId || null;
+      } catch (e) { console.error(e); }
     }
-    function pushUndo(){
-      try{
-        const snap=JSON.stringify({profiles,activeProfileId});
+    function pushUndo() {
+      try {
+        const snap = JSON.stringify({ profiles, activeProfileId });
         undoStack.push(snap);
-        if(undoStack.length>30)undoStack.shift();
-        undoBtn.disabled=false;
-      }catch(e){console.error(e);}
+        if (undoStack.length > 30) undoStack.shift();
+        undoBtn.disabled = false;
+      } catch (e) { console.error(e); }
     }
-    undoBtn.addEventListener('click',()=>{
-      if(!undoStack.length)return toast('Nothing to undo');
-      const snap=undoStack.pop();
-      try{
-        const s=JSON.parse(snap);
-        profiles=s.profiles||{};
-        activeProfileId=s.activeProfileId||null;
-        saveState();renderAll();toast('Undone');
-        if(!undoStack.length)undoBtn.disabled=true;
-      }catch(e){console.error(e);}
+    undoBtn.addEventListener('click', () => {
+      if (!undoStack.length) return toast('Nothing to undo');
+      const snap = undoStack.pop();
+      try {
+        const s = JSON.parse(snap);
+        profiles = s.profiles || {};
+        activeProfileId = s.activeProfileId || null;
+        saveState(); renderAll(); toast('Undone');
+        if (!undoStack.length) undoBtn.disabled = true;
+      } catch (e) { console.error(e); }
     });
 
-    function renderProfiles(){
-      profilesContainer.innerHTML='';compareA.innerHTML='';compareB.innerHTML='';
-      if(!Object.keys(profiles).length){
-        const span=document.createElement('span');
-        span.textContent='No profiles yet – add one';
-        span.style.fontSize='.75rem';span.style.color='#9ca3af';
+    function renderProfiles() {
+      profilesContainer.innerHTML = ''; compareA.innerHTML = ''; compareB.innerHTML = '';
+      if (!Object.keys(profiles).length) {
+        const span = document.createElement('span');
+        span.textContent = 'No profiles yet – add one';
+        span.style.fontSize = '.75rem'; span.style.color = '#9ca3af';
         profilesContainer.appendChild(span);
       }
-      Object.keys(profiles).forEach(id=>{
-        const p=profiles[id];
-        const btn=document.createElement('button');
-        btn.className='btn-profile';
-        if(id===activeProfileId)btn.classList.add('active');
-        btn.textContent=p.name;btn.onclick=()=>setActiveProfile(id);
+      Object.keys(profiles).forEach(id => {
+        const p = profiles[id];
+        const btn = document.createElement('button');
+        btn.className = 'btn-profile';
+        if (id === activeProfileId) btn.classList.add('active');
+        btn.textContent = p.name; btn.onclick = () => setActiveProfile(id);
         profilesContainer.appendChild(btn);
-        const optA=document.createElement('option');
-        optA.value=id;optA.textContent=p.name;compareA.appendChild(optA);
-        const optB=document.createElement('option');
-        optB.value=id;optB.textContent=p.name;compareB.appendChild(optB);
+        const optA = document.createElement('option');
+        optA.value = id; optA.textContent = p.name; compareA.appendChild(optA);
+        const optB = document.createElement('option');
+        optB.value = id; optB.textContent = p.name; compareB.appendChild(optB);
       });
-      activeProfileDisplay.textContent=
-        activeProfileId&&profiles[activeProfileId]?profiles[activeProfileId].name:'';
+      activeProfileDisplay.textContent =
+        activeProfileId && profiles[activeProfileId] ? profiles[activeProfileId].name : '';
     }
-    function setActiveProfile(id){activeProfileId=id;saveState();renderAll();}
-    addProfileBtn.addEventListener('click',()=>{
-      const name=prompt('Profile name (student, e.g. Ashif Student)');
-      if(!name)return;
-      const id=uid('p');
-      profiles[id]={name,entries:[],topics:[]};
-      activeProfileId=id;saveState();renderAll();toast('Profile added');
+    function setActiveProfile(id) { activeProfileId = id; saveState(); renderAll(); }
+    addProfileBtn.addEventListener('click', () => {
+      const name = prompt('Profile name (student, e.g. Ashif Student)');
+      if (!name) return;
+      const id = uid('p');
+      profiles[id] = { name, entries: [], topics: [] };
+      activeProfileId = id; saveState(); renderAll(); toast('Profile added');
     });
 
-    function currentEntries(){return activeProfileId&&profiles[activeProfileId]?profiles[activeProfileId].entries:[];}
-    function currentTopics(){return activeProfileId&&profiles[activeProfileId]?profiles[activeProfileId].topics:[];}
+    function currentEntries() { return activeProfileId && profiles[activeProfileId] ? profiles[activeProfileId].entries : []; }
+    function currentTopics() { return activeProfileId && profiles[activeProfileId] ? profiles[activeProfileId].topics : []; }
 
-    function renderTable(){
-      marksTableBody.innerHTML='';
-      if(!activeProfileId||!profiles[activeProfileId])return;
-      currentEntries().forEach(row=>{
-        const tr=document.createElement('tr');
-        const examTd=document.createElement('td');examTd.textContent=row.exam;
-        const subjectTd=document.createElement('td');subjectTd.textContent=row.subject;
-        const marksTd=document.createElement('td');marksTd.textContent=Number(row.marks||0).toFixed(1);
-        const statusTd=document.createElement('td');
-        const pill=document.createElement('span');
-        const m=Number(row.marks||0);
-        if(m<40){pill.textContent='Weak';pill.className='pill-weak';}
-        else if(m>=75){pill.textContent='Strong';pill.className='pill-strong';}
-        else{pill.textContent='Average';pill.className='pill-avg';}
+    function renderTable() {
+      marksTableBody.innerHTML = '';
+      if (!activeProfileId || !profiles[activeProfileId]) return;
+      currentEntries().forEach(row => {
+        const tr = document.createElement('tr');
+        const examTd = document.createElement('td'); examTd.textContent = row.exam;
+        const subjectTd = document.createElement('td'); subjectTd.textContent = row.subject;
+        const marksTd = document.createElement('td'); marksTd.textContent = Number(row.marks || 0).toFixed(1);
+        const statusTd = document.createElement('td');
+        const pill = document.createElement('span');
+        const m = Number(row.marks || 0);
+        if (m < 40) { pill.textContent = 'Weak'; pill.className = 'pill-weak'; }
+        else if (m >= 75) { pill.textContent = 'Strong'; pill.className = 'pill-strong'; }
+        else { pill.textContent = 'Average'; pill.className = 'pill-avg'; }
         statusTd.appendChild(pill);
-        const actTd=document.createElement('td');
-        const editBtn=document.createElement('button');
-        editBtn.className='btn';editBtn.style.fontSize='.7rem';editBtn.textContent='Edit';
-        editBtn.onclick=()=>editRow(row.id);
-        const delBtn=document.createElement('button');
-        delBtn.className='btn';delBtn.style.fontSize='.7rem';delBtn.textContent='Del';
-        delBtn.onclick=()=>deleteRow(row.id);
-        const wrap=document.createElement('div');wrap.className='row-actions';
-        wrap.appendChild(editBtn);wrap.appendChild(delBtn);actTd.appendChild(wrap);
-        tr.appendChild(examTd);tr.appendChild(subjectTd);tr.appendChild(marksTd);
-        tr.appendChild(statusTd);tr.appendChild(actTd);
+        const actTd = document.createElement('td');
+        const editBtn = document.createElement('button');
+        editBtn.className = 'btn'; editBtn.style.fontSize = '.7rem'; editBtn.textContent = 'Edit';
+        editBtn.onclick = () => editRow(row.id);
+        const delBtn = document.createElement('button');
+        delBtn.className = 'btn'; delBtn.style.fontSize = '.7rem'; delBtn.textContent = 'Del';
+        delBtn.onclick = () => deleteRow(row.id);
+        const wrap = document.createElement('div'); wrap.className = 'row-actions';
+        wrap.appendChild(editBtn); wrap.appendChild(delBtn); actTd.appendChild(wrap);
+        tr.appendChild(examTd); tr.appendChild(subjectTd); tr.appendChild(marksTd);
+        tr.appendChild(statusTd); tr.appendChild(actTd);
         marksTableBody.appendChild(tr);
       });
     }
-    function editRow(id){
-      if(!activeProfileId)return;
-      const prof=profiles[activeProfileId];
-      const row=prof.entries.find(r=>r.id===id);
-      if(!row)return;
-      const exam=prompt('Class - Term',row.exam);if(exam===null)return;
-      const subject=prompt('Subject',row.subject);if(subject===null)return;
-      const marks=prompt('Marks 0–100',row.marks);if(marks===null)return;
-      const topic=prompt('Topic (optional)',row.topic||'');if(topic===null)return;
+    function editRow(id) {
+      if (!activeProfileId) return;
+      const prof = profiles[activeProfileId];
+      const row = prof.entries.find(r => r.id === id);
+      if (!row) return;
+      const exam = prompt('Class - Term', row.exam); if (exam === null) return;
+      const subject = prompt('Subject', row.subject); if (subject === null) return;
+      const marks = prompt('Marks 0–100', row.marks); if (marks === null) return;
+      const topic = prompt('Topic (optional)', row.topic || ''); if (topic === null) return;
       pushUndo();
-      row.exam=exam||'Class - Term';
-      row.subject=subject||'Subject';
-      row.marks=Math.max(0,Math.min(100,Number(marks||0)));
-      row.topic=topic||'';
-      saveState();renderAll();toast('Edited entry');
+      row.exam = exam || 'Class - Term';
+      row.subject = subject || 'Subject';
+      row.marks = Math.max(0, Math.min(100, Number(marks || 0)));
+      row.topic = topic || '';
+      saveState(); renderAll(); toast('Edited entry');
     }
-    function deleteRow(id){
-      if(!activeProfileId)return;
-      if(!confirm('Delete this entry?'))return;
+    function deleteRow(id) {
+      if (!activeProfileId) return;
+      if (!confirm('Delete this entry?')) return;
       pushUndo();
-      const prof=profiles[activeProfileId];
-      prof.entries=prof.entries.filter(r=>r.id!==id);
-      saveState();renderAll();toast('Deleted entry');
+      const prof = profiles[activeProfileId];
+      prof.entries = prof.entries.filter(r => r.id !== id);
+      saveState(); renderAll(); toast('Deleted entry');
     }
 
-    function updateTopicOptions(){
-      const cls=classSelect.value;
-      const sub=subjectInput.value;
-      topicInput.innerHTML='<option value="" disabled selected>Select topic</option>';
-      if(topicOptions[cls]&&topicOptions[cls][sub]){
-        topicOptions[cls][sub].forEach(t=>{
-          const opt=document.createElement('option');
-          opt.value=t;opt.textContent=t;topicInput.appendChild(opt);
+    function updateTopicOptions() {
+      const cls = classSelect.value;
+      const sub = subjectInput.value;
+      topicInput.innerHTML = '<option value="" disabled selected>Select topic</option>';
+      if (topicOptions[cls] && topicOptions[cls][sub]) {
+        topicOptions[cls][sub].forEach(t => {
+          const opt = document.createElement('option');
+          opt.value = t; opt.textContent = t; topicInput.appendChild(opt);
         });
       }
     }
-    classSelect.addEventListener('change',updateTopicOptions);
-    subjectInput.addEventListener('change',updateTopicOptions);
+    classSelect.addEventListener('change', updateTopicOptions);
+    subjectInput.addEventListener('change', updateTopicOptions);
 
-    entryForm.addEventListener('submit',e=>{
+    entryForm.addEventListener('submit', e => {
       e.preventDefault();
-      const cls=classSelect.value||'Class';
-      const examType=examTypeSelect.value||'1st Term';
-      const exam=cls+' - '+examType;
-      const subject=subjectInput.value||'Subject';
-      const marks=parseFloat(marksInput.value);
-      if(isNaN(marks))return toast('Enter marks');
-      const topic=topicInput.value||'';
-      const errVal=errorPercentInput.value.trim();
-      if(!activeProfileId){toast('Create/select a profile first');return;}
+      const cls = classSelect.value || 'Class';
+      const examType = examTypeSelect.value || '1st Term';
+      const exam = cls + ' - ' + examType;
+      const subject = subjectInput.value || 'Subject';
+      const marks = parseFloat(marksInput.value);
+      if (isNaN(marks)) return toast('Enter marks');
+      const topic = topicInput.value || '';
+      const errVal = errorPercentInput.value.trim();
+      if (!activeProfileId) { toast('Create/select a profile first'); return; }
       pushUndo();
-      const prof=profiles[activeProfileId];
+      const prof = profiles[activeProfileId];
       prof.entries.push({
-        id:uid('e'),
+        id: uid('e'),
         exam,
         subject,
-        marks:Math.max(0,Math.min(100,marks)),
+        marks: Math.max(0, Math.min(100, marks)),
         topic
       });
-      if(topic||errVal){
-        const errorPercent=Math.min(100,Math.max(0,parseFloat(errVal||'0')));
+      if (topic || errVal) {
+        const errorPercent = Math.min(100, Math.max(0, parseFloat(errVal || '0')));
         prof.topics.push({
-          id:uid('t'),
+          id: uid('t'),
           exam,
-          topic:topic||'Topic',
-          errorPercent:isNaN(errorPercent)?0:errorPercent
+          topic: topic || 'Topic',
+          errorPercent: isNaN(errorPercent) ? 0 : errorPercent
         });
       }
-      saveState();renderAll();
-      classSelect.value='';examTypeSelect.value='';subjectInput.value='';
-      topicInput.innerHTML='<option value="" disabled selected>Select topic</option>';
-      marksInput.value='';errorPercentInput.value='';
+      saveState(); renderAll();
+      classSelect.value = ''; examTypeSelect.value = ''; subjectInput.value = '';
+      topicInput.innerHTML = '<option value="" disabled selected>Select topic</option>';
+      marksInput.value = ''; errorPercentInput.value = '';
     });
 
-    addTopicBtn.addEventListener('click',()=>{
-      if(!activeProfileId)return toast('Select profile first');
-      const topic=topicInput.value||'';
-      const errVal=errorPercentInput.value.trim();
-      const cls=classSelect.value||'Class';
-      const examType=examTypeSelect.value||'1st Term';
-      const exam=cls+' - '+examType;
-      if(!topic||!errVal)return toast('Topic + Error % required');
-      const errorPercent=Math.min(100,Math.max(0,parseFloat(errVal)));
-      if(isNaN(errorPercent))return toast('Enter valid error');
+    addTopicBtn.addEventListener('click', () => {
+      if (!activeProfileId) return toast('Select profile first');
+      const topic = topicInput.value || '';
+      const errVal = errorPercentInput.value.trim();
+      const cls = classSelect.value || 'Class';
+      const examType = examTypeSelect.value || '1st Term';
+      const exam = cls + ' - ' + examType;
+      if (!topic || !errVal) return toast('Topic + Error % required');
+      const errorPercent = Math.min(100, Math.max(0, parseFloat(errVal)));
+      if (isNaN(errorPercent)) return toast('Enter valid error');
       pushUndo();
       profiles[activeProfileId].topics.push({
-        id:uid('t'),
+        id: uid('t'),
         exam,
         topic,
         errorPercent
       });
-      topicInput.value='';errorPercentInput.value='';
-      saveState();renderAll();toast('Topic added');
+      topicInput.value = ''; errorPercentInput.value = '';
+      saveState(); renderAll(); toast('Topic added');
     });
 
-    resetBtn.addEventListener('click',()=>{
-      if(!activeProfileId)return toast('Select profile first');
-      if(!confirm('Reset all data for this profile?'))return;
+    resetBtn.addEventListener('click', () => {
+      if (!activeProfileId) return toast('Select profile first');
+      if (!confirm('Reset all data for this profile?')) return;
       pushUndo();
-      profiles[activeProfileId].entries=[];
-      profiles[activeProfileId].topics=[];
-      saveState();renderAll();toast('Profile reset');
+      profiles[activeProfileId].entries = [];
+      profiles[activeProfileId].topics = [];
+      saveState(); renderAll(); toast('Profile reset');
     });
 
-    function rebuildCharts(){
-      if(!activeProfileId||!profiles[activeProfileId]){
-        avgScoreEl.textContent='';weakestSubjectEl.textContent='';weakestTopicEl.textContent='';
+    function rebuildCharts() {
+      if (!activeProfileId || !profiles[activeProfileId]) {
+        avgScoreEl.textContent = ''; weakestSubjectEl.textContent = ''; weakestTopicEl.textContent = '';
         return;
       }
-      if(subjectBarChart)subjectBarChart.destroy();
-      if(examLineChart)examLineChart.destroy();
-      if(topicPieChart)topicPieChart.destroy();
-      const entries=currentEntries();
-      const topics=currentTopics();
+      if (subjectBarChart) subjectBarChart.destroy();
+      if (examLineChart) examLineChart.destroy();
+      if (topicPieChart) topicPieChart.destroy();
+      const entries = currentEntries();
+      const topics = currentTopics();
 
-      const subjectMap={};
-      entries.forEach(e=>{
-        if(!subjectMap[e.subject])subjectMap[e.subject]=[];
-        subjectMap[e.subject].push(Number(e.marks||0));
+      const subjectMap = {};
+      entries.forEach(e => {
+        if (!subjectMap[e.subject]) subjectMap[e.subject] = [];
+        subjectMap[e.subject].push(Number(e.marks || 0));
       });
-      const subjects=Object.keys(subjectMap);
-      const subjectAverages=subjects.map(s=>{
-        const arr=subjectMap[s];
-        return arr.reduce((a,b)=>a+b,0)/arr.length;
-      });
-
-      const examMap={};
-      entries.forEach(e=>{
-        if(!examMap[e.exam])examMap[e.exam]=[];
-        examMap[e.exam].push(Number(e.marks||0));
-      });
-      const exams=Object.keys(examMap);
-      const examAverages=exams.map(ex=>{
-        const arr=examMap[ex];
-        return arr.reduce((a,b)=>a+b,0)/arr.length;
+      const subjects = Object.keys(subjectMap);
+      const subjectAverages = subjects.map(s => {
+        const arr = subjectMap[s];
+        return arr.reduce((a, b) => a + b, 0) / arr.length;
       });
 
-      const topicLabels=topics.map(t=>t.topic||'Topic');
-      const topicErrors=topics.map(t=>t.errorPercent||0);
+      const examMap = {};
+      entries.forEach(e => {
+        if (!examMap[e.exam]) examMap[e.exam] = [];
+        examMap[e.exam].push(Number(e.marks || 0));
+      });
+      const exams = Object.keys(examMap);
+      const examAverages = exams.map(ex => {
+        const arr = examMap[ex];
+        return arr.reduce((a, b) => a + b, 0) / arr.length;
+      });
 
-      if(!entries.length){avgScoreEl.textContent='';}
-      else{
-        const total=entries.reduce((acc,e)=>acc+Number(e.marks||0),0);
-        const avg=total/entries.length;
-        avgScoreEl.textContent=avg.toFixed(1)+' / 100';
+      const topicLabels = topics.map(t => t.topic || 'Topic');
+      const topicErrors = topics.map(t => t.errorPercent || 0);
+
+      if (!entries.length) { avgScoreEl.textContent = ''; }
+      else {
+        const total = entries.reduce((acc, e) => acc + Number(e.marks || 0), 0);
+        const avg = total / entries.length;
+        avgScoreEl.textContent = avg.toFixed(1) + ' / 100';
       }
-      if(!subjects.length){weakestSubjectEl.textContent='';}
-      else{
-        let weakestSub=null,weakestAvg=Infinity;
-        subjects.forEach((s,i)=>{
-          if(subjectAverages[i]<weakestAvg){
-            weakestAvg=subjectAverages[i];weakestSub=s;
+      if (!subjects.length) { weakestSubjectEl.textContent = ''; }
+      else {
+        let weakestSub = null, weakestAvg = Infinity;
+        subjects.forEach((s, i) => {
+          if (subjectAverages[i] < weakestAvg) {
+            weakestAvg = subjectAverages[i]; weakestSub = s;
           }
         });
-        weakestSubjectEl.textContent=weakestSub?`${weakestSub} (${weakestAvg.toFixed(1)})`:'';
+        weakestSubjectEl.textContent = weakestSub ? `${weakestSub} (${weakestAvg.toFixed(1)})` : '';
       }
-      if(!topics.length){weakestTopicEl.textContent='';}
-      else{
-        let weak=topics[0];
-        topics.forEach(t=>{
-          if((t.errorPercent||0)>(weak.errorPercent||0))weak=t;
+      if (!topics.length) { weakestTopicEl.textContent = ''; }
+      else {
+        let weak = topics[0];
+        topics.forEach(t => {
+          if ((t.errorPercent || 0) > (weak.errorPercent || 0)) weak = t;
         });
-        weakestTopicEl.textContent=weak.topic
-          ?`${weak.topic} (${(weak.errorPercent||0).toFixed(1)}%)`:'';
+        weakestTopicEl.textContent = weak.topic
+          ? `${weak.topic} (${(weak.errorPercent || 0).toFixed(1)}%)` : '';
       }
 
-      if(subjects.length){
-        subjectBarChart=new Chart(subjectBarCtx,{
-          type:'bar',
-          data:{labels:subjects,datasets:[{
-            label:'Average marks',
-            data:subjectAverages,
-            backgroundColor:subjects.map(()=> 'rgba(59,130,246,0.7)'),
-            borderRadius:6
-          }]},
-          options:{
-            plugins:{
-              legend:{display:false},
-              tooltip:{callbacks:{label:ctx=>ctx.parsed.y.toFixed(1)+' / 100'}}
+      if (subjects.length) {
+        subjectBarChart = new Chart(subjectBarCtx, {
+          type: 'bar',
+          data: {
+            labels: subjects, datasets: [{
+              label: 'Average marks',
+              data: subjectAverages,
+              backgroundColor: subjects.map(() => 'rgba(59,130,246,0.7)'),
+              borderRadius: 6
+            }]
+          },
+          options: {
+            plugins: {
+              legend: { display: false },
+              tooltip: { callbacks: { label: ctx => ctx.parsed.y.toFixed(1) + ' / 100' } }
             },
-            scales:{
-              y:{beginAtZero:true,max:100,
-                 grid:{color:'rgba(30,64,175,0.3)'},
-                 ticks:{color:'#e5e7eb',font:{size:10}}},
-              x:{ticks:{color:'#e5e7eb',font:{size:9}}}
+            scales: {
+              y: {
+                beginAtZero: true, max: 100,
+                grid: { color: 'rgba(30,64,175,0.3)' },
+                ticks: { color: '#e5e7eb', font: { size: 10 } }
+              },
+              x: { ticks: { color: '#e5e7eb', font: { size: 9 } } }
             }
           }
         });
       }
-      if(exams.length){
-        examLineChart=new Chart(examLineCtx,{
-          type:'line',
-          data:{labels:exams,datasets:[{
-            label:'Average marks',
-            data:examAverages,fill:false,
-            borderColor:'rgba(34,197,94,0.8)',
-            tension:0.25,
-            pointBackgroundColor:'rgba(34,197,94,1)',
-            pointRadius:3
-          }]},
-          options:{
-            plugins:{
-              legend:{display:false},
-              tooltip:{callbacks:{label:ctx=>ctx.parsed.y.toFixed(1)+' / 100'}}
+      if (exams.length) {
+        examLineChart = new Chart(examLineCtx, {
+          type: 'line',
+          data: {
+            labels: exams, datasets: [{
+              label: 'Average marks',
+              data: examAverages, fill: false,
+              borderColor: 'rgba(34,197,94,0.8)',
+              tension: 0.25,
+              pointBackgroundColor: 'rgba(34,197,94,1)',
+              pointRadius: 3
+            }]
+          },
+          options: {
+            plugins: {
+              legend: { display: false },
+              tooltip: { callbacks: { label: ctx => ctx.parsed.y.toFixed(1) + ' / 100' } }
             },
-            scales:{
-              y:{beginAtZero:true,max:100,
-                 grid:{color:'rgba(16,185,129,0.35)'},
-                 ticks:{color:'#e5e7eb',font:{size:10}}},
-              x:{ticks:{color:'#e5e7eb',font:{size:9}}}
+            scales: {
+              y: {
+                beginAtZero: true, max: 100,
+                grid: { color: 'rgba(16,185,129,0.35)' },
+                ticks: { color: '#e5e7eb', font: { size: 10 } }
+              },
+              x: { ticks: { color: '#e5e7eb', font: { size: 9 } } }
             }
           }
         });
       }
-      if(topics.length){
-        const colors=topicErrors.map((_,i)=>[
-          '#FF6384','#36A2EB','#FFCE56','#4BC0C0','#9966FF','#FF9F40',
-          '#66FF66','#FF66B2','#66CCFF','#FF6666','#FFCC66','#66FFCC',
-          '#C266FF','#FF66CC','#66FF66'
-        ][i%15]);
-        topicPieChart=new Chart(topicPieCtx,{
-          type:'pie',
-          data:{labels:topicLabels,datasets:[{
-            data:topicErrors,
-            backgroundColor:colors,
-            borderColor:'#111827',borderWidth:1
-          }]},
-          options:{
-            plugins:{
-              legend:{
-                position:'right',
-                labels:{
-                  color:'#e5e7eb',font:{size:10,weight:'bold'},
-                  generateLabels:chart=>{
-                    const data=chart.data;
-                    if(!data.labels.length)return[];
-                    return data.labels.map((label,i)=>{
-                      const value=data.datasets[0].data[i];
-                      const status=value>=40?'WEAK':'OK';
-                      return{
-                        text:label.toUpperCase()+' – '+status,
-                        fillStyle:data.datasets[0].backgroundColor[i],
-                        strokeStyle:'#111827',lineWidth:2,index:i
+      if (topics.length) {
+        const colors = topicErrors.map((_, i) => [
+          '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40',
+          '#66FF66', '#FF66B2', '#66CCFF', '#FF6666', '#FFCC66', '#66FFCC',
+          '#C266FF', '#FF66CC', '#66FF66'
+        ][i % 15]);
+        topicPieChart = new Chart(topicPieCtx, {
+          type: 'pie',
+          data: {
+            labels: topicLabels, datasets: [{
+              data: topicErrors,
+              backgroundColor: colors,
+              borderColor: '#111827', borderWidth: 1
+            }]
+          },
+          options: {
+            plugins: {
+              legend: {
+                position: 'right',
+                labels: {
+                  color: '#e5e7eb', font: { size: 10, weight: 'bold' },
+                  generateLabels: chart => {
+                    const data = chart.data;
+                    if (!data.labels.length) return [];
+                    return data.labels.map((label, i) => {
+                      const value = data.datasets[0].data[i];
+                      const status = value >= 40 ? 'WEAK' : 'OK';
+                      return {
+                        text: label.toUpperCase() + ' – ' + status,
+                        fillStyle: data.datasets[0].backgroundColor[i],
+                        strokeStyle: '#111827', lineWidth: 2, index: i
                       };
                     });
                   }
                 }
               },
-              tooltip:{callbacks:{label:ctx=>`${ctx.label} – ${ctx.parsed.toFixed(1)}% error`}}
+              tooltip: { callbacks: { label: ctx => `${ctx.label} – ${ctx.parsed.toFixed(1)}% error` } }
             }
           }
         });
       }
-      const allMarks=entries.map(e=>Number(e.marks||0));
-      const avgVal=allMarks.length
-        ?allMarks.reduce((a,b)=>a+b,0)/allMarks.length:0;
+      const allMarks = entries.map(e => Number(e.marks || 0));
+      const avgVal = allMarks.length
+        ? allMarks.reduce((a, b) => a + b, 0) / allMarks.length : 0;
       renderHeatmap(subjectMap);
       renderGauge(avgVal);
-      renderStudyPlan(subjectAverages,subjects);
+      renderStudyPlan(subjectAverages, subjects);
     }
 
-    function renderHeatmap(subjectMap){
-      heatmapGrid.innerHTML='';
-      const subjects=Object.keys(subjectMap);
-      const maxCells=18;
-      if(!subjects.length){
-        for(let i=0;i<6;i++){
-          const cell=document.createElement('div');
-          cell.className='hm-cell';heatmapGrid.appendChild(cell);
+    function renderHeatmap(subjectMap) {
+      heatmapGrid.innerHTML = '';
+      const subjects = Object.keys(subjectMap);
+      const maxCells = 18;
+      if (!subjects.length) {
+        for (let i = 0; i < 6; i++) {
+          const cell = document.createElement('div');
+          cell.className = 'hm-cell'; heatmapGrid.appendChild(cell);
         }
         return;
       }
-      subjects.slice(0,maxCells).forEach(s=>{
-        const arr=subjectMap[s];
-        const avg=arr.reduce((a,b)=>a+b,0)/arr.length;
-        const color=heatmapColor(avg);
-        const cell=document.createElement('div');
-        cell.className='hm-cell';cell.style.background=color;
-        cell.title=s+' – '+avg.toFixed(1);
-        cell.textContent=s.split(' ').map(w=>w[0]).join('').slice(0,3).toUpperCase();
+      subjects.slice(0, maxCells).forEach(s => {
+        const arr = subjectMap[s];
+        const avg = arr.reduce((a, b) => a + b, 0) / arr.length;
+        const color = heatmapColor(avg);
+        const cell = document.createElement('div');
+        cell.className = 'hm-cell'; cell.style.background = color;
+        cell.title = s + ' – ' + avg.toFixed(1);
+        cell.textContent = s.split(' ').map(w => w[0]).join('').slice(0, 3).toUpperCase();
         heatmapGrid.appendChild(cell);
       });
     }
-    function heatmapColor(val){
-      const r=Math.min(255,Math.floor((100-val)*2.5));
-      const g=Math.min(255,Math.floor(val*2.55));
+    function heatmapColor(val) {
+      const r = Math.min(255, Math.floor((100 - val) * 2.5));
+      const g = Math.min(255, Math.floor(val * 2.55));
       return `rgba(${r},${g},80,0.85)`;
     }
-    function renderGauge(value){
-      const ctx=gaugeCanvas.getContext('2d');
-      ctx.clearRect(0,0,gaugeCanvas.width,gaugeCanvas.height);
-      const w=gaugeCanvas.width,h=gaugeCanvas.height;
-      const cx=w/2,cy=h*1.1;
-      const radius=Math.min(w,h);
-      const startAngle=Math.PI,endAngle=0;
-      ctx.lineWidth=14;ctx.lineCap='round';
-      ctx.beginPath();ctx.strokeStyle='rgba(148,163,184,0.35)';
-      ctx.arc(cx,cy,radius*0.7,startAngle,endAngle);ctx.stroke();
-      const pct=Math.max(0,Math.min(1,value/100));
-      const ang=startAngle+(endAngle-startAngle)*pct;
-      const grad=ctx.createLinearGradient(0,0,w,0);
-      grad.addColorStop(0,'#f97316');
-      grad.addColorStop(0.5,'#eab308');
-      grad.addColorStop(1,'#22c55e');
-      ctx.beginPath();ctx.strokeStyle=grad;
-      ctx.arc(cx,cy,radius*0.7,startAngle,ang);ctx.stroke();
-      const nx=cx+Math.cos(ang)*radius*0.55;
-      const ny=cy+Math.sin(ang)*radius*0.55;
-      ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(nx,ny);
-      ctx.lineWidth=2;ctx.strokeStyle='rgba(248,250,252,0.95)';ctx.stroke();
-      gaugeText.textContent=Math.round(value)+'/100';
+    function renderGauge(value) {
+      const ctx = gaugeCanvas.getContext('2d');
+      ctx.clearRect(0, 0, gaugeCanvas.width, gaugeCanvas.height);
+      const w = gaugeCanvas.width, h = gaugeCanvas.height;
+      const cx = w / 2, cy = h * 1.1;
+      const radius = Math.min(w, h);
+      const startAngle = Math.PI, endAngle = 0;
+      ctx.lineWidth = 14; ctx.lineCap = 'round';
+      ctx.beginPath(); ctx.strokeStyle = 'rgba(148,163,184,0.35)';
+      ctx.arc(cx, cy, radius * 0.7, startAngle, endAngle); ctx.stroke();
+      const pct = Math.max(0, Math.min(1, value / 100));
+      const ang = startAngle + (endAngle - startAngle) * pct;
+      const grad = ctx.createLinearGradient(0, 0, w, 0);
+      grad.addColorStop(0, '#f97316');
+      grad.addColorStop(0.5, '#eab308');
+      grad.addColorStop(1, '#22c55e');
+      ctx.beginPath(); ctx.strokeStyle = grad;
+      ctx.arc(cx, cy, radius * 0.7, startAngle, ang); ctx.stroke();
+      const nx = cx + Math.cos(ang) * radius * 0.55;
+      const ny = cy + Math.sin(ang) * radius * 0.55;
+      ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(nx, ny);
+      ctx.lineWidth = 2; ctx.strokeStyle = 'rgba(248,250,252,0.95)'; ctx.stroke();
+      gaugeText.textContent = Math.round(value) + '/100';
     }
 
     // NEW STUDY PLAN LOGIC:
     // Weak (avg < 40)   -> 120 min
     // Average (40-74)   -> 60 min
     // Strong (>= 75)    -> 45 min
-    function renderStudyPlan(subjectAverages,subjects){
-      studyPlanDiv.innerHTML='';
-      const summaryEl=document.getElementById('studyPlanSummary');
-      if(!subjects.length){
-        studyPlanDiv.textContent='No data';
-        summaryEl.textContent='Study plan';
+    function renderStudyPlan(subjectAverages, subjects) {
+      studyPlanDiv.innerHTML = '';
+      const summaryEl = document.getElementById('studyPlanSummary');
+      if (!subjects.length) {
+        studyPlanDiv.textContent = 'No data';
+        summaryEl.textContent = 'Study plan';
         return;
       }
 
-      const data = subjects.map((s,i)=>{
+      const data = subjects.map((s, i) => {
         const avg = subjectAverages[i];
         let status, minutes;
-        if (avg < 40){
+        if (avg < 40) {
           status = 'Weak';
           minutes = 120;
-        } else if (avg >= 75){
+        } else if (avg >= 75) {
           status = 'Strong';
           minutes = 45;
         } else {
           status = 'Average';
           minutes = 60;
         }
-        return {subject: s, avg, status, minutes};
+        return { subject: s, avg, status, minutes };
       });
 
-      const order = {Weak: 0, Average: 1, Strong: 2};
-      data.sort((a,b)=>{
+      const order = { Weak: 0, Average: 1, Strong: 2 };
+      data.sort((a, b) => {
         if (order[a.status] !== order[b.status]) {
           return order[a.status] - order[b.status];
         }
         return a.avg - b.avg;
       });
 
-      data.forEach((item, index)=>{
-        const row=document.createElement('div');
-        row.className='study-row';
-        row.innerHTML=`
+      data.forEach((item, index) => {
+        const row = document.createElement('div');
+        row.className = 'study-row';
+        row.innerHTML = `
           <div class="muted-small">
-            Slot ${index+1} – ${item.subject} (${item.status})
+            Slot ${index + 1} – ${item.subject} (${item.status})
           </div>
           <div style="font-weight:700;">${item.minutes} min</div>
         `;
@@ -1225,139 +1387,140 @@
         weakest.subject + '.';
     }
 
-    suggestBtn.addEventListener('click',()=>{
-      if(!activeProfileId)return toast('Create/select profile first');
-      const prof=profiles[activeProfileId];
-      const entries=prof.entries;
-      if(!entries.length)return toast('Add some entries first');
-      const subjectMap={};
-      entries.forEach(e=>{
-        if(!subjectMap[e.subject])subjectMap[e.subject]=[];
-        subjectMap[e.subject].push(Number(e.marks||0));
+    suggestBtn.addEventListener('click', () => {
+      if (!activeProfileId) return toast('Create/select profile first');
+      const prof = profiles[activeProfileId];
+      const entries = prof.entries;
+      if (!entries.length) return toast('Add some entries first');
+      const subjectMap = {};
+      entries.forEach(e => {
+        if (!subjectMap[e.subject]) subjectMap[e.subject] = [];
+        subjectMap[e.subject].push(Number(e.marks || 0));
       });
-      let weakestSub=null,weakestAvg=999;
-      Object.keys(subjectMap).forEach(s=>{
-        const arr=subjectMap[s];
-        const avg=arr.reduce((a,b)=>a+b,0)/arr.length;
-        if(avg<weakestAvg){weakestAvg=avg;weakestSub=s;}
+      let weakestSub = null, weakestAvg = 999;
+      Object.keys(subjectMap).forEach(s => {
+        const arr = subjectMap[s];
+        const avg = arr.reduce((a, b) => a + b, 0) / arr.length;
+        if (avg < weakestAvg) { weakestAvg = avg; weakestSub = s; }
       });
-      const topics=prof.topics||[];
-      let weakTopic=topics.slice().sort((a,b)=>(b.errorPercent||0)-(a.errorPercent||0))[0];
-      let suggestion=`Study ${weakestSub} next (avg ~${weakestAvg.toFixed(1)}).`;
-      if(weakTopic){
-        suggestion+=` Focus on topic "${weakTopic.topic}" (err ~${(weakTopic.errorPercent||0).toFixed(1)}%).`;
+      const topics = prof.topics || [];
+      let weakTopic = topics.slice().sort((a, b) => (b.errorPercent || 0) - (a.errorPercent || 0))[0];
+      let suggestion = `Study ${weakestSub} next (avg ~${weakestAvg.toFixed(1)}).`;
+      if (weakTopic) {
+        suggestion += ` Focus on topic "${weakTopic.topic}" (err ~${(weakTopic.errorPercent || 0).toFixed(1)}%).`;
       }
-      aiSuggestionEl.textContent=suggestion;toast('Suggestion ready');
+      aiSuggestionEl.textContent = suggestion; toast('Suggestion ready');
     });
 
-    compareBtn.addEventListener('click',()=>{
-      const a=compareA.value,b=compareB.value;
-      if(!a||!b)return toast('Select two profiles');
-      if(a===b)return toast('Choose two different profiles');
-      const pa=profiles[a],pb=profiles[b];
-      function avg(arr){
-        if(!arr.length)return 0;
-        return Math.round(arr.reduce((s,x)=>s+Number(x.marks||0),0)/arr.length);
+    compareBtn.addEventListener('click', () => {
+      const a = compareA.value, b = compareB.value;
+      if (!a || !b) return toast('Select two profiles');
+      if (a === b) return toast('Choose two different profiles');
+      const pa = profiles[a], pb = profiles[b];
+      function avg(arr) {
+        if (!arr.length) return 0;
+        return Math.round(arr.reduce((s, x) => s + Number(x.marks || 0), 0) / arr.length);
       }
       alert(`${pa.name}: avg ≈ ${avg(pa.entries)}    ${pb.name}: avg ≈ ${avg(pb.entries)}`);
     });
 
-    exportCsvBtn.addEventListener('click',()=>{
-      if(!activeProfileId)return toast('Select profile');
-      const prof=profiles[activeProfileId];
-      const entries=prof.entries;
-      if(!entries.length)return toast('No entries to export');
-      let csv='exam,subject,marks,topic\n';
-      entries.forEach(e=>{
-        const safeTopic=(e.topic||'').replace(/,/g,' ');
-        csv+=`${e.exam},${e.subject},${e.marks},${safeTopic}\n`;
+    exportCsvBtn.addEventListener('click', () => {
+      if (!activeProfileId) return toast('Select profile');
+      const prof = profiles[activeProfileId];
+      const entries = prof.entries;
+      if (!entries.length) return toast('No entries to export');
+      let csv = 'exam,subject,marks,topic\n';
+      entries.forEach(e => {
+        const safeTopic = (e.topic || '').replace(/,/g, ' ');
+        csv += `${e.exam},${e.subject},${e.marks},${safeTopic}\n`;
       });
-      const blob=new Blob([csv],{type:'text/csv'});
-      const url=URL.createObjectURL(blob);
-      const a=document.createElement('a');
-      a.href=url;a.download=prof.name.replace(/\s+/g,'_')+'_data.csv';
-      a.click();URL.revokeObjectURL(url);toast('CSV exported');
+      const blob = new Blob([csv], { type: 'text/csv' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = prof.name.replace(/\s+/g, '_') + '_data.csv';
+      a.click(); URL.revokeObjectURL(url); toast('CSV exported');
     });
 
-    importBtn.addEventListener('click',()=>importFile.click());
-    importFile.addEventListener('change',e=>{
-      const f=e.target.files[0];if(!f)return;
-      const reader=new FileReader();
-      reader.onload=ev=>{
-        try{
-          const raw=ev.target.result;
-          if(f.type.includes('json')||raw.trim().startsWith('{')){
-            const parsed=JSON.parse(raw);
-            if(parsed.profiles){
+    importBtn.addEventListener('click', () => importFile.click());
+    importFile.addEventListener('change', e => {
+      const f = e.target.files[0]; if (!f) return;
+      const reader = new FileReader();
+      reader.onload = ev => {
+        try {
+          const raw = ev.target.result;
+          if (f.type.includes('json') || raw.trim().startsWith('{')) {
+            const parsed = JSON.parse(raw);
+            if (parsed.profiles) {
               pushUndo();
-              profiles=parsed.profiles;
-              activeProfileId=parsed.activeProfileId||Object.keys(profiles)[0]||null;
-              saveState();renderAll();toast('Imported JSON profiles');
-            }else toast('JSON does not contain profiles');
-          }else{
-            const lines=raw.split('\n').map(l=>l.trim()).filter(Boolean);
+              profiles = parsed.profiles;
+              activeProfileId = parsed.activeProfileId || Object.keys(profiles)[0] || null;
+              saveState(); renderAll(); toast('Imported JSON profiles');
+            } else toast('JSON does not contain profiles');
+          } else {
+            const lines = raw.split('\n').map(l => l.trim()).filter(Boolean);
             lines.shift();
-            const id=uid('p');
-            profiles[id]={name:'Imported',entries:[],topics:[]};
-            lines.forEach(line=>{
-              const parts=line.split(',');
+            const id = uid('p');
+            profiles[id] = { name: 'Imported', entries: [], topics: [] };
+            lines.forEach(line => {
+              const parts = line.split(',');
               profiles[id].entries.push({
-                id:uid('e'),
-                exam:parts[0],
-                subject:parts[1],
-                marks:Number(parts[2]||0),
-                topic:parts[3]||''
+                id: uid('e'),
+                exam: parts[0],
+                subject: parts[1],
+                marks: Number(parts[2] || 0),
+                topic: parts[3] || ''
               });
             });
-            activeProfileId=id;saveState();renderAll();toast('Imported CSV profile');
+            activeProfileId = id; saveState(); renderAll(); toast('Imported CSV profile');
           }
-        }catch(err){console.error(err);toast('Import failed');}
+        } catch (err) { console.error(err); toast('Import failed'); }
       };
       reader.readAsText(f);
     });
 
-    function renderAll(){renderProfiles();renderTable();rebuildCharts();}
-    function bootstrapInitialData(){
-      if(Object.keys(profiles).length)return;
-      const id=uid('p');
-      profiles[id]={
-        name:'You',
-        entries:[
-          {id:uid('e'),exam:'Class 10 - 1st Term',subject:'Maths',marks:72,topic:'Real Numbers'},
-          {id:uid('e'),exam:'Class 10 - 1st Term',subject:'Science',marks:58,topic:'Chemical Reactions'},
-          {id:uid('e'),exam:'Class 10 - 1st Term',subject:'English',marks:85,topic:'First Flight – Prose'}
+    function renderAll() { renderProfiles(); renderTable(); rebuildCharts(); }
+    function bootstrapInitialData() {
+      if (Object.keys(profiles).length) return;
+      const id = uid('p');
+      profiles[id] = {
+        name: 'You',
+        entries: [
+          { id: uid('e'), exam: 'Class 10 - 1st Term', subject: 'Maths', marks: 72, topic: 'Real Numbers' },
+          { id: uid('e'), exam: 'Class 10 - 1st Term', subject: 'Science', marks: 58, topic: 'Chemical Reactions' },
+          { id: uid('e'), exam: 'Class 10 - 1st Term', subject: 'English', marks: 85, topic: 'First Flight – Prose' }
         ],
-        topics:[
-          {id:uid('t'),exam:'Class 10 - 1st Term',topic:'Real Numbers',errorPercent:36},
-          {id:uid('t'),exam:'Class 10 - 1st Term',topic:'Chemical Reactions',errorPercent:44}
+        topics: [
+          { id: uid('t'), exam: 'Class 10 - 1st Term', topic: 'Real Numbers', errorPercent: 36 },
+          { id: uid('t'), exam: 'Class 10 - 1st Term', topic: 'Chemical Reactions', errorPercent: 44 }
         ]
       };
-      activeProfileId=id;saveState();
+      activeProfileId = id; saveState();
     }
 
-    window.addEventListener('keydown',e=>{
-      if((e.ctrlKey||e.metaKey)&&!e.shiftKey&&e.key.toLowerCase()==='z'){
-        e.preventDefault();undoBtn.click();
+    window.addEventListener('keydown', e => {
+      if ((e.ctrlKey || e.metaKey) && !e.shiftKey && e.key.toLowerCase() === 'z') {
+        e.preventDefault(); undoBtn.click();
       }
-      if((e.ctrlKey||e.metaKey)&&!e.shiftKey&&e.key.toLowerCase()==='s'){
-        e.preventDefault();exportCsvBtn.click();
+      if ((e.ctrlKey || e.metaKey) && !e.shiftKey && e.key.toLowerCase() === 's') {
+        e.preventDefault(); exportCsvBtn.click();
       }
     });
 
-    loadState();bootstrapInitialData();renderAll();
+    loadState(); bootstrapInitialData(); renderAll();
   </script>
 
   <script>
-    window.addEventListener('DOMContentLoaded',function(){
-      const overlay=document.getElementById('welcome-overlay');
-      const btn=document.getElementById('continue-btn');
-      function closeWelcome(){
+    window.addEventListener('DOMContentLoaded', function () {
+      const overlay = document.getElementById('welcome-overlay');
+      const btn = document.getElementById('continue-btn');
+      function closeWelcome() {
         overlay.classList.add('fade-out');
-        setTimeout(()=>{overlay.style.display='none';},520);
+        setTimeout(() => { overlay.style.display = 'none'; }, 520);
       }
-      btn.addEventListener('click',closeWelcome);
-      setTimeout(closeWelcome,3000);
+      btn.addEventListener('click', closeWelcome);
+      setTimeout(closeWelcome, 3000);
     });
   </script>
 </body>
+
 </html>
