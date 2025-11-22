@@ -1,0 +1,1556 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Exam Performance Visualizer — Combined</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <style>
+    :root {
+      --bg: #000000;
+      --card: #111111;
+      --muted: #e5e7eb;
+      --accent1: #0033cc;
+      --accent2: #00ff00;
+      --accent3: #ffff00;
+      --border-strong: #0066ff;
+      --glass: rgba(0, 102, 255, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    html, body {
+      height: 100%;
+    }
+
+    body {
+      background: #000000;
+      color: #ffffff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      user-select: none;
+    }
+
+    header {
+      padding: 16px 24px;
+      border-bottom: 2px solid #ffffff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #0033cc;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    header h1 {
+      font-size: 1.4rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      color: #ffffff;
+    }
+
+    header p {
+      font-size: 0.78rem;
+      color: #b0c4ff;
+      margin-top: 2px;
+    }
+
+    header .badge {
+      font-size: 0.75rem;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid #ffffff;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #ffffff;
+      white-space: nowrap;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    main {
+      flex: 1;
+      display: grid;
+      grid-template-columns: minmax(280px, 380px) minmax(0, 1fr);
+      gap: 16px;
+      padding: 16px;
+    }
+
+    @media (max-width: 900px) {
+      main {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .card {
+      background: #111111;
+      border-radius: 14px;
+      border: 2px solid #0066ff;
+      box-shadow: 0 18px 45px rgba(0, 102, 255, 0.8);
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .card h2 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #ffffff;
+    }
+
+    .card p.sub {
+      font-size: 0.8rem;
+      color: #a0a0a0;
+    }
+
+    label {
+      display: block;
+      font-size: 0.8rem;
+      margin-bottom: 4px;
+      color: #ffffff;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 7px 9px;
+      border-radius: 8px;
+      border: 1px solid #334155;
+      background: #020617;
+      color: #ffffff;
+      font-size: 0.8rem;
+      outline: none;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: #4f46e5;
+      box-shadow: 0 0 0 1px rgba(79, 70, 229, 0.8);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      margin-bottom: 8px;
+      align-items: end;
+    }
+
+    @media (max-width: 520px) {
+      .form-row {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .btn {
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      font-size: 0.8rem;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      background: transparent;
+      color: #ffffff;
+      border: 1px solid #4b5563;
+      transition: background 0.2s, transform 0.1s;
+      user-select: none;
+    }
+
+    .btn:hover {
+      background: rgba(148, 163, 184, 0.2);
+      transform: translateY(-1px);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #0000ff, #00ff00);
+      color: #ffff00;
+      box-shadow: 0 10px 30px rgba(0, 255, 0, 0.7);
+      border: none;
+    }
+
+    .btn-profile {
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.4);
+      background: transparent;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #e5e7eb;
+      cursor: pointer;
+    }
+
+    .btn-profile.active {
+      background: linear-gradient(90deg,#0000ff,#00ff00);
+      color: #000000;
+      border: none;
+    }
+
+    .profiles-bar {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      max-width: 260px;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      border: 1px solid #949ca8;
+      font-size: 0.75rem;
+      color: #ffffff;
+    }
+
+    .chip span.dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #f97316;
+    }
+
+    .divider {
+      height: 1px;
+      background: radial-gradient(circle, rgba(148, 163, 184, 0.5), transparent);
+      margin: 8px 0;
+    }
+
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.8rem;
+      margin-top: 4px;
+    }
+
+    .table th, .table td {
+      border-bottom: 1px solid rgba(30, 41, 59, 0.9);
+      padding: 4px 0;
+      text-align: left;
+      color: #ffffff;
+    }
+
+    .table th {
+      color: #b0b9c6;
+      font-weight: 500;
+    }
+
+    .pill-weak, .pill-strong, .pill-avg {
+      padding: 2px 7px;
+      border-radius: 999px;
+      font-size: 0.7rem;
+      display: inline-block;
+    }
+
+    .pill-weak {
+      background: rgba(239, 68, 68, 0.5);
+      color: #fecaca;
+      border: 1px solid rgba(239, 68, 68, 0.8);
+    }
+
+    .pill-strong {
+      background: rgba(22, 163, 74, 0.5);
+      color: #bbf7d0;
+      border: 1px solid rgba(22, 163, 74, 0.8);
+    }
+
+    .pill-avg {
+      background: rgba(249, 115, 22, 0.3);
+      color: #fed7aa;
+      border: 1px solid rgba(249, 115, 22, 0.8);
+    }
+
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    .stat-box {
+      padding: 8px;
+      border-radius: 10px;
+      border: 1px solid #0066ff;
+      background: #001a4d;
+    }
+
+    .stat-label {
+      font-size: 0.7rem;
+      color: #a0a0a0;
+      margin-bottom: 2px;
+    }
+
+    .stat-value {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #ffffff;
+    }
+
+    .stat-sub {
+      font-size: 0.7rem;
+      color: #5a5a5a;
+    }
+
+    .charts-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: 12px;
+      margin-top: 6px;
+    }
+
+    @media (max-width: 1100px) {
+      .charts-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .chart-card {
+      background: radial-gradient(circle at top left, rgba(0,102,255,0.8), #000000);
+      border-radius: 14px;
+      border: 2px solid #0047b3;
+      padding: 10px;
+      min-height: 220px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .chart-card.alt {
+      background: radial-gradient(circle at top, rgba(0,255,128,0.6), #000000);
+      border-color: rgba(0, 255, 128, 0.9);
+    }
+
+    .chart-title {
+      font-size: 0.8rem;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: #ffffff;
+    }
+
+    .chart-sub {
+      font-size: 0.7rem;
+      color: #b0cee2;
+    }
+
+    .hint {
+      font-size: 0.75rem;
+      color: #7b7b7b;
+      margin-top: 4px;
+    }
+
+    footer {
+      padding: 8px 16px 14px;
+      font-size: 0.7rem;
+      color: #7b7b7b;
+      border-top: 1px solid #111111;
+      text-align: right;
+      background: #000000;
+    }
+
+    #topicPieChart {
+      max-width: 200px !important;
+      max-height: 200px !important;
+      width: 200px !important;
+      height: 200px !important;
+      margin: auto;
+      display: block;
+    }
+
+    /* Heatmap */
+    .heatmap {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 6px;
+    }
+
+    .hm-cell {
+      height: 26px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: #eee;
+      background: rgba(255,255,255,0.1);
+      box-shadow: 0 0 6px rgba(0,0,0,0.2) inset;
+      user-select: none;
+      cursor: default;
+    }
+
+    /* Study plan rows */
+    .study-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 4px 0;
+      font-size: 0.8rem;
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      padding: 10px 14px;
+      border-radius: 10px;
+      background: rgba(0,0,0,0.7);
+      color: #fff;
+      font-weight: 600;
+      font-size: 0.9rem;
+      user-select: none;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.3s;
+      z-index: 9999;
+    }
+    .toast.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* Gauge container */
+    .gauge-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 6px;
+    }
+
+    /* Small utility */
+    .row-actions {
+      display: flex;
+      gap: 4px;
+    }
+
+    .muted-small {
+      font-size: 0.75rem;
+      color: #a0a0a0;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>EXAM PERFORMANCE VISUALIZER</h1>
+    <p>Track marks, spot weak topics, and plan smarter revision.</p>
+  </div>
+
+  <div class="header-right">
+    <span class="badge">Student Analytics</span>
+
+    <!-- Profiles -->
+    <div class="card" style="padding:6px 8px; box-shadow:none; border-color:#ffffff;">
+      <div class="muted-small" style="margin-bottom:4px;">Profiles</div>
+      <div id="profilesContainer" class="profiles-bar"></div>
+      <button class="btn" id="addProfileBtn" style="margin-top:4px;">+ Profile</button>
+      <div class="muted-small" style="margin-top:4px;">
+        Active: <span id="activeProfileDisplay">—</span>
+      </div>
+    </div>
+
+    <!-- Export / Import -->
+    <div class="card" style="padding:6px 8px; box-shadow:none; border-color:#ffffff;">
+      <div class="muted-small" style="margin-bottom:4px;">Data</div>
+      <button class="btn" id="exportCsvBtn">Export CSV</button>
+      <button class="btn" id="importBtn">Import</button>
+      <input id="importFile" type="file" style="display:none" accept="application/json, text/csv" />
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- LEFT: DATA ENTRY -->
+  <section class="card" aria-label="Data entry and quick actions">
+    <h2>Enter Performance Data</h2>
+    <p class="sub">Profile-based entries; autosaved with undo support.</p>
+
+    <!-- quick info -->
+    <div class="chip" style="margin-bottom:4px;">
+      <span class="dot"></span>
+      Autosaves to browser • Ctrl+Z for Undo • Ctrl+S for CSV
+    </div>
+
+    <form id="entryForm">
+      <div class="form-row">
+        <div>
+          <label for="examName">Exam</label>
+          <input id="examName" type="text" placeholder="Midterm 1" />
+        </div>
+        <div>
+          <label for="subject">Subject</label>
+          <input id="subject" type="text" placeholder="Maths" />
+        </div>
+        <div>
+          <label for="marks">Marks (out of 100)</label>
+          <input id="marks" type="number" min="0" max="100" placeholder="78" />
+        </div>
+        <div>
+          <button type="submit" class="btn btn-primary" style="width:100%;">
+            + Add marks
+          </button>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div>
+          <label for="topic">Topic</label>
+          <input id="topic" type="text" placeholder="Algebra / K-Maps" />
+        </div>
+        <div>
+          <label for="errorPercent">Error %</label>
+          <input id="errorPercent" type="number" min="0" max="100" placeholder="e.g. 40" />
+        </div>
+        <div>
+          <label for="tagExam">Exam tag</label>
+          <input id="tagExam" type="text" placeholder="Same as Exam" />
+        </div>
+        <div>
+          <button type="button" id="addTopicBtn" class="btn" style="width:100%;">
+            + Add topic
+          </button>
+        </div>
+      </div>
+    </form>
+
+    <div style="display:flex;gap:6px;align-items:center;margin-top:2px;flex-wrap:wrap;">
+      <button class="btn" id="undoBtn" disabled>Undo</button>
+      <button class="btn" id="resetBtn">Reset profile data</button>
+    </div>
+
+    <div class="divider"></div>
+
+    <table class="table" id="marksTable">
+      <thead>
+      <tr>
+        <th>Exam</th>
+        <th>Subject</th>
+        <th>Marks</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <p class="hint">
+      Tip: Add at least 3–4 entries across different exams and subjects to see meaningful charts.
+    </p>
+
+    <div class="divider"></div>
+
+    <!-- Quick compare and AI Suggest -->
+    <div style="display:flex;flex-direction:column;gap:6px;">
+      <div>
+        <label>Quick compare (2 profiles)</label>
+        <div style="display:flex;gap:6px;margin-top:4px;flex-wrap:wrap;">
+          <select id="compareA" style="max-width:130px;"></select>
+          <select id="compareB" style="max-width:130px;"></select>
+          <button class="btn" id="compareBtn">Compare</button>
+        </div>
+      </div>
+
+      <div>
+        <button class="btn" id="suggestBtn">AI Suggest (offline)</button>
+        <div id="aiSuggestion" class="hint" style="margin-top:4px;">No suggestion yet.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RIGHT: INSIGHTS & CHARTS -->
+  <section class="card" aria-label="Insights and charts">
+    <h2>Insights & Visual Analytics</h2>
+    <p class="sub">Visualize trends, compare subjects, and focus on weakest topics.</p>
+
+    <div class="stats-row">
+      <div class="stat-box">
+        <div class="stat-label">Overall average</div>
+        <div class="stat-value" id="avgScore">–</div>
+        <div class="stat-sub">Across all exams</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">Weakest subject</div>
+        <div class="stat-value" id="weakestSubject">–</div>
+        <div class="stat-sub">Based on average marks</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">Weakest topic</div>
+        <div class="stat-value" id="weakestTopic">–</div>
+        <div class="stat-sub">Highest error %</div>
+      </div>
+    </div>
+
+    <div class="charts-grid">
+      <div class="chart-card">
+        <div class="chart-title">
+          <span>Subject-wise Average Marks</span>
+          <span class="chart-sub">Bar chart</span>
+        </div>
+        <canvas id="subjectBarChart"></canvas>
+      </div>
+      <div class="chart-card alt">
+        <div class="chart-title">
+          <span>Exam Trend (Overall)</span>
+          <span class="chart-sub">Line chart</span>
+        </div>
+        <canvas id="examLineChart"></canvas>
+      </div>
+    </div>
+
+    <div class="chart-card" style="margin-top:10px;">
+      <div class="chart-title">
+        <span>Topic-wise Error Distribution</span>
+        <span class="chart-sub">Pie chart</span>
+      </div>
+      <canvas id="topicPieChart" width="200" height="200"></canvas>
+      <p class="hint">
+        Colorful slices mark topics with different error rates. Labels marked "WEAK" indicate errors ≥ 40%.
+      </p>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Gauge + heatmap + study plan -->
+    <div class="chart-card" style="margin-top:6px;">
+      <div class="chart-title">
+        <span>Performance Gauge & Study Plan</span>
+        <span class="chart-sub">Smart guidance</span>
+      </div>
+      <div class="gauge-wrap">
+        <canvas id="gaugeCanvas" width="180" height="120"></canvas>
+        <div style="font-size:0.8rem;">
+          <div id="gaugeText">—</div>
+          <div id="studyPlanSummary" style="margin-top:4px;">Study plan: —</div>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div>
+        <div class="chart-title" style="margin-bottom:4px;">
+          <span>Subject heatmap</span>
+          <span class="chart-sub">Higher = greener</span>
+        </div>
+        <div id="heatmapGrid" class="heatmap"></div>
+      </div>
+      <div class="divider"></div>
+      <div>
+        <div class="chart-title" style="margin-bottom:4px;">
+          <span>Study Planner</span>
+          <span class="chart-sub">Weak areas get more time</span>
+        </div>
+        <div id="studyPlan"></div>
+      </div>
+    </div>
+
+    <p class="hint">
+      Strategy: First fix topics with highest error %, then gradually lift the lowest-scoring subject to improve your overall average.
+    </p>
+  </section>
+</main>
+
+<footer>
+  Designed for strategic exam prep: visualize, diagnose, then revise. • Single HTML file.
+</footer>
+
+<div id="toast" class="toast"></div>
+
+<script>
+  // --- STATE (profile based) ---
+  const STORAGE_KEY = 'examViz_combined_profiles_v1';
+
+  let profiles = {};
+  let activeProfileId = null;
+  let undoStack = [];
+
+  // DOM refs
+  const profilesContainer = document.getElementById('profilesContainer');
+  const addProfileBtn = document.getElementById('addProfileBtn');
+  const activeProfileDisplay = document.getElementById('activeProfileDisplay');
+
+  const exportCsvBtn = document.getElementById('exportCsvBtn');
+  const importBtn = document.getElementById('importBtn');
+  const importFile = document.getElementById('importFile');
+
+  const entryForm = document.getElementById('entryForm');
+  const marksTableBody = document.querySelector('#marksTable tbody');
+
+  const avgScoreEl = document.getElementById('avgScore');
+  const weakestSubjectEl = document.getElementById('weakestSubject');
+  const weakestTopicEl = document.getElementById('weakestTopic');
+
+  const examNameInput = document.getElementById('examName');
+  const subjectInput = document.getElementById('subject');
+  const marksInput = document.getElementById('marks');
+  const topicInput = document.getElementById('topic');
+  const errorPercentInput = document.getElementById('errorPercent');
+  const tagExamInput = document.getElementById('tagExam');
+
+  const addTopicBtn = document.getElementById('addTopicBtn');
+  const resetBtn = document.getElementById('resetBtn');
+  const undoBtn = document.getElementById('undoBtn');
+
+  const compareA = document.getElementById('compareA');
+  const compareB = document.getElementById('compareB');
+  const compareBtn = document.getElementById('compareBtn');
+
+  const suggestBtn = document.getElementById('suggestBtn');
+  const aiSuggestionEl = document.getElementById('aiSuggestion');
+
+  const subjectBarCtx = document.getElementById('subjectBarChart').getContext('2d');
+  const examLineCtx = document.getElementById('examLineChart').getContext('2d');
+  const topicPieCtx = document.getElementById('topicPieChart').getContext('2d');
+  const gaugeCanvas = document.getElementById('gaugeCanvas');
+  const gaugeText = document.getElementById('gaugeText');
+  const studyPlanDiv = document.getElementById('studyPlan');
+  const heatmapGrid = document.getElementById('heatmapGrid');
+
+  let subjectBarChart, examLineChart, topicPieChart;
+
+  // UTILITIES
+  function uid(prefix='id') {
+    return prefix + '_' + Math.random().toString(36).slice(2,9);
+  }
+
+  function toast(msg, timeout=2200) {
+    const t = document.getElementById('toast');
+    if (!t) return;
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(t._timeout);
+    t._timeout = setTimeout(() => t.classList.remove('show'), timeout);
+  }
+
+  function saveState() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({profiles, activeProfileId}));
+  }
+
+  function loadState() {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return;
+    try {
+      const parsed = JSON.parse(raw);
+      profiles = parsed.profiles || {};
+      activeProfileId = parsed.activeProfileId || Object.keys(profiles)[0] || null;
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  // UNDO
+  function pushUndo() {
+    try {
+      const snap = JSON.stringify({profiles, activeProfileId});
+      undoStack.push(snap);
+      if (undoStack.length > 30) undoStack.shift();
+      undoBtn.disabled = false;
+    } catch (e) {}
+  }
+
+  undoBtn.addEventListener('click', () => {
+    if (!undoStack.length) return toast('Nothing to undo');
+    const snap = undoStack.pop();
+    try {
+      const s = JSON.parse(snap);
+      profiles = s.profiles;
+      activeProfileId = s.activeProfileId;
+      saveState();
+      renderAll();
+      toast('Undone');
+      if (!undoStack.length) undoBtn.disabled = true;
+    } catch (e) {
+      console.error(e);
+    }
+  });
+
+  // PROFILES
+  function renderProfiles() {
+    profilesContainer.innerHTML = '';
+    compareA.innerHTML = '';
+    compareB.innerHTML = '';
+
+    Object.keys(profiles).forEach(id => {
+      const p = profiles[id];
+      const btn = document.createElement('button');
+      btn.className = 'btn-profile';
+      if (id === activeProfileId) btn.classList.add('active');
+      btn.textContent = p.name;
+      btn.onclick = () => setActiveProfile(id);
+      profilesContainer.appendChild(btn);
+
+      const optA = document.createElement('option');
+      optA.value = id;
+      optA.textContent = p.name;
+      compareA.appendChild(optA);
+
+      const optB = document.createElement('option');
+      optB.value = id;
+      optB.textContent = p.name;
+      compareB.appendChild(optB);
+    });
+
+    if (!Object.keys(profiles).length) {
+      const span = document.createElement('span');
+      span.textContent = 'No profiles — add one';
+      span.style.fontSize = '0.75rem';
+      span.style.color = '#9ca3af';
+      profilesContainer.appendChild(span);
+    }
+
+    activeProfileDisplay.textContent =
+      activeProfileId && profiles[activeProfileId]
+        ? profiles[activeProfileId].name
+        : '—';
+  }
+
+  function setActiveProfile(id) {
+    activeProfileId = id;
+    saveState();
+    renderAll();
+  }
+
+  addProfileBtn.addEventListener('click', () => {
+    const name = prompt('Profile name (student) — e.g. "Ashif"')
+      || ('Student ' + (Object.keys(profiles).length + 1));
+    const id = uid('p');
+    profiles[id] = { name, entries: [], topics: [] };
+    activeProfileId = id;
+    saveState();
+    renderAll();
+    toast('Profile added');
+  });
+
+  // HELPERS to access current profile arrays
+  function currentEntries() {
+    if (!activeProfileId || !profiles[activeProfileId]) return [];
+    return profiles[activeProfileId].entries || [];
+  }
+  function currentTopics() {
+    if (!activeProfileId || !profiles[activeProfileId]) return [];
+    return profiles[activeProfileId].topics || [];
+  }
+
+  // TABLE RENDER
+  function renderTable() {
+    marksTableBody.innerHTML = '';
+    if (!activeProfileId || !profiles[activeProfileId]) return;
+    const rows = currentEntries();
+
+    rows.forEach(row => {
+      const tr = document.createElement('tr');
+
+      const examTd = document.createElement('td');
+      examTd.textContent = row.exam;
+
+      const subjectTd = document.createElement('td');
+      subjectTd.textContent = row.subject;
+
+      const marksTd = document.createElement('td');
+      marksTd.textContent = (Number(row.marks) || 0).toFixed(1);
+
+      const statusTd = document.createElement('td');
+      const pill = document.createElement('span');
+      const m = Number(row.marks) || 0;
+      if (m < 40) {
+        pill.textContent = 'Weak';
+        pill.className = 'pill-weak';
+      } else if (m >= 75) {
+        pill.textContent = 'Strong';
+        pill.className = 'pill-strong';
+      } else {
+        pill.textContent = 'Average';
+        pill.className = 'pill-avg';
+      }
+      statusTd.appendChild(pill);
+
+      const actTd = document.createElement('td');
+      const editBtn = document.createElement('button');
+      editBtn.className = 'btn';
+      editBtn.style.fontSize = '0.7rem';
+      editBtn.textContent = 'Edit';
+      editBtn.onclick = () => editRow(row.id);
+
+      const delBtn = document.createElement('button');
+      delBtn.className = 'btn';
+      delBtn.style.fontSize = '0.7rem';
+      delBtn.textContent = 'Del';
+      delBtn.onclick = () => deleteRow(row.id);
+
+      const wrap = document.createElement('div');
+      wrap.className = 'row-actions';
+      wrap.appendChild(editBtn);
+      wrap.appendChild(delBtn);
+      actTd.appendChild(wrap);
+
+      tr.appendChild(examTd);
+      tr.appendChild(subjectTd);
+      tr.appendChild(marksTd);
+      tr.appendChild(statusTd);
+      tr.appendChild(actTd);
+
+      marksTableBody.appendChild(tr);
+    });
+  }
+
+  function editRow(id) {
+    if (!activeProfileId) return;
+    const prof = profiles[activeProfileId];
+    const row = prof.entries.find(r => r.id === id);
+    if (!row) return;
+
+    const exam = prompt('Exam', row.exam);
+    if (exam === null) return;
+    const subject = prompt('Subject', row.subject);
+    if (subject === null) return;
+    const marks = prompt('Marks (0-100)', row.marks);
+    if (marks === null) return;
+    const topic = prompt('Topic (optional)', row.topic || '');
+    if (topic === null) return;
+
+    pushUndo();
+    row.exam = exam || 'Exam';
+    row.subject = subject || 'Subject';
+    row.marks = Math.max(0, Math.min(100, Number(marks) || 0));
+    row.topic = topic || '';
+    saveState();
+    renderAll();
+    toast('Edited entry');
+  }
+
+  function deleteRow(id) {
+    if (!activeProfileId) return;
+    if (!confirm('Delete this entry?')) return;
+    pushUndo();
+    const prof = profiles[activeProfileId];
+    prof.entries = prof.entries.filter(r => r.id !== id);
+    saveState();
+    renderAll();
+    toast('Deleted entry');
+  }
+
+  // ADD ENTRY + TOPIC
+  function addEntry({exam, subject, marks, topic}) {
+    if (!activeProfileId) return toast('Create/select a profile first');
+    pushUndo();
+    const prof = profiles[activeProfileId];
+    const entry = {
+      id: uid('e'),
+      exam: exam || 'Exam',
+      subject: subject || 'Subject',
+      marks: Math.max(0, Math.min(100, Number(marks) || 0)),
+      topic: topic || ''
+    };
+    prof.entries.push(entry);
+
+    // If topic provided but no explicit error percent, default simple error guess
+    if (topic) {
+      const errGuess = Math.max(0, 100 - entry.marks);
+      prof.topics.push({
+        id: uid('t'),
+        exam: exam || 'Exam',
+        topic,
+        errorPercent: errGuess
+      });
+    }
+    saveState();
+    renderAll();
+  }
+
+  entryForm.addEventListener('submit', e => {
+    e.preventDefault();
+    const exam = examNameInput.value.trim() || 'Exam';
+    const subject = subjectInput.value.trim() || 'Subject';
+    const marks = parseFloat(marksInput.value);
+    if (isNaN(marks)) {
+      toast('Enter marks');
+      return;
+    }
+    const topic = topicInput.value.trim();
+    const errVal = errorPercentInput.value.trim();
+
+    // if user filled topic + error, add them more accurately
+    if (topic && errVal !== '') {
+      const errorPercent = Math.min(100, Math.max(0, parseFloat(errVal)));
+      const tagExam = (tagExamInput.value.trim() || exam);
+      if (!activeProfileId) {
+        toast('Create/select a profile first');
+        return;
+      }
+      pushUndo();
+      const prof = profiles[activeProfileId];
+      prof.entries.push({
+        id: uid('e'),
+        exam,
+        subject,
+        marks: Math.max(0, Math.min(100, marks)),
+        topic
+      });
+      prof.topics.push({
+        id: uid('t'),
+        exam: tagExam,
+        topic,
+        errorPercent: isNaN(errorPercent) ? 0 : errorPercent
+      });
+      saveState();
+      renderAll();
+    } else {
+      addEntry({exam, subject, marks, topic});
+    }
+
+    examNameInput.value = '';
+    subjectInput.value = '';
+    marksInput.value = '';
+    topicInput.value = '';
+    errorPercentInput.value = '';
+    tagExamInput.value = '';
+  });
+
+  addTopicBtn.addEventListener('click', () => {
+    if (!activeProfileId) return toast('Select profile first');
+    const topic = topicInput.value.trim();
+    const errVal = errorPercentInput.value.trim();
+    const exam = tagExamInput.value.trim() || examNameInput.value.trim() || 'Exam';
+    if (!topic || errVal === '') {
+      toast('Topic + Error% required');
+      return;
+    }
+    const errorPercent = Math.min(100, Math.max(0, parseFloat(errVal)));
+    if (isNaN(errorPercent)) {
+      toast('Enter valid error%');
+      return;
+    }
+    pushUndo();
+    profiles[activeProfileId].topics.push({
+      id: uid('t'),
+      exam,
+      topic,
+      errorPercent
+    });
+    topicInput.value = '';
+    errorPercentInput.value = '';
+    tagExamInput.value = '';
+    saveState();
+    renderAll();
+    toast('Topic added');
+  });
+
+  resetBtn.addEventListener('click', () => {
+    if (!activeProfileId) return toast('Select profile first');
+    if (!confirm('Reset all data for this profile?')) return;
+    pushUndo();
+    profiles[activeProfileId].entries = [];
+    profiles[activeProfileId].topics = [];
+    saveState();
+    renderAll();
+    toast('Profile reset');
+  });
+
+  // STATS + CHARTS
+  function rebuildCharts() {
+    if (!activeProfileId || !profiles[activeProfileId]) {
+      // destroy if any
+      if (subjectBarChart) subjectBarChart.destroy();
+      if (examLineChart) examLineChart.destroy();
+      if (topicPieChart) topicPieChart.destroy();
+      avgScoreEl.textContent = '–';
+      weakestSubjectEl.textContent = '–';
+      weakestTopicEl.textContent = '–';
+    }
+    const entries = currentEntries();
+    const topics = currentTopics();
+
+    // Subject averages
+    const subjectMap = {};
+    entries.forEach(e => {
+      subjectMap[e.subject] = subjectMap[e.subject] || [];
+      subjectMap[e.subject].push(Number(e.marks) || 0);
+    });
+    const subjects = Object.keys(subjectMap);
+    const subjectAverages = subjects.map(s => {
+      const arr = subjectMap[s];
+      return arr.reduce((a,b) => a + b, 0) / arr.length;
+    });
+
+    // Exam averages
+    const examMap = {};
+    entries.forEach(e => {
+      examMap[e.exam] = examMap[e.exam] || [];
+      examMap[e.exam].push(Number(e.marks) || 0);
+    });
+    const exams = Object.keys(examMap);
+    const examAverages = exams.map(ex => {
+      const arr = examMap[ex];
+      return arr.reduce((a,b) => a + b, 0) / arr.length;
+    });
+
+    // Topic errors
+    const topicLabels = topics.map(t => t.topic || 'Topic');
+    const topicErrors = topics.map(t => t.errorPercent || 0);
+
+    // Overall average
+    if (!entries.length) {
+      avgScoreEl.textContent = '–';
+    } else {
+      const total = entries.reduce((acc, e) => acc + (Number(e.marks) || 0), 0);
+      const avg = total / entries.length;
+      avgScoreEl.textContent = avg.toFixed(1) + '/100';
+    }
+
+    // Weakest subject
+    if (!subjects.length) {
+      weakestSubjectEl.textContent = '–';
+    } else {
+      let weakestSub = null;
+      let weakestAvg = Infinity;
+      subjects.forEach((s, i) => {
+        if (subjectAverages[i] < weakestAvg) {
+          weakestAvg = subjectAverages[i];
+          weakestSub = s;
+        }
+      });
+      weakestSubjectEl.textContent =
+        weakestSub ? weakestSub + ' (' + weakestAvg.toFixed(1) + ')' : '–';
+    }
+
+    // Weakest topic
+    if (!topics.length) {
+      weakestTopicEl.textContent = '–';
+    } else {
+      let weak = topics[0];
+      topics.forEach(t => {
+        if ((t.errorPercent || 0) > (weak.errorPercent || 0)) {
+          weak = t;
+        }
+      });
+      weakestTopicEl.textContent =
+        weak.topic ? weak.topic + ' (' + (weak.errorPercent || 0).toFixed(1) + '%)' : '–';
+    }
+
+    // Destroy old charts
+    if (subjectBarChart) subjectBarChart.destroy();
+    if (examLineChart) examLineChart.destroy();
+    if (topicPieChart) topicPieChart.destroy();
+
+    // Subject bar
+    subjectBarChart = new Chart(subjectBarCtx, {
+      type: 'bar',
+      data: {
+        labels: subjects,
+        datasets: [{
+          label: 'Average marks',
+          data: subjectAverages,
+          backgroundColor: subjects.map(() => 'rgba(59,130,246,0.7)'),
+          borderRadius: 6
+        }]
+      },
+      options: {
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: ctx => ctx.parsed.y.toFixed(1) + '/100'
+            }
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            max: 100,
+            grid: { color: 'rgba(30,64,175,0.3)' },
+            ticks: { color: '#ffffff', font: { size: 10 } }
+          },
+          x: {
+            ticks: { color: '#ffffff', font: { size: 9 } }
+          }
+        }
+      }
+    });
+
+    // Exam line
+    examLineChart = new Chart(examLineCtx, {
+      type: 'line',
+      data: {
+        labels: exams,
+        datasets: [{
+          label: 'Average marks',
+          data: examAverages,
+          fill: false,
+          borderColor: 'rgba(34,197,94,0.8)',
+          tension: 0.25,
+          pointBackgroundColor: 'rgba(34,197,94,1)',
+          pointRadius: 3
+        }]
+      },
+      options: {
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: ctx => ctx.parsed.y.toFixed(1) + '/100'
+            }
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            max: 100,
+            grid: { color: 'rgba(16,185,129,0.35)' },
+            ticks: { color: '#ffffff', font: { size: 10 } }
+          },
+          x: {
+            ticks: { color: '#ffffff', font: { size: 9 } }
+          }
+        }
+      }
+    });
+
+    // Topic pie
+    const vibrantColors = [
+      '#FF6384','#36A2EB','#FFCE56','#4BC0C0','#9966FF',
+      '#FF9F40','#66FF66','#FF66B2','#66CCFF','#FF6666',
+      '#FFCC66','#66FFCC','#C266FF','#FF66CC','#66FF66'
+    ];
+    const colors = topicErrors.map((_, i) => vibrantColors[i % vibrantColors.length]);
+
+    topicPieChart = new Chart(topicPieCtx, {
+      type: 'pie',
+      data: {
+        labels: topicLabels,
+        datasets: [{
+          data: topicErrors,
+          backgroundColor: colors,
+          borderColor: '#111827',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        plugins: {
+          legend: {
+            position: 'right',
+            labels: {
+              color: '#ffffff',
+              font: { size: 10, weight: 'bold' },
+              generateLabels: chart => {
+                const data = chart.data;
+                if (!data.labels.length) return [];
+                return data.labels.map((label, i) => {
+                  const value = data.datasets[0].data[i];
+                  const status = value >= 40 ? 'WEAK' : 'OK';
+                  return {
+                    text: label.toUpperCase() + ' – ' + status,
+                    fillStyle: data.datasets[0].backgroundColor[i],
+                    strokeStyle: '#111827',
+                    lineWidth: 2,
+                    index: i
+                  };
+                });
+              }
+            }
+          },
+          tooltip: {
+            callbacks: {
+              label: ctx => `${ctx.label}: ${ctx.parsed.toFixed(1)}% error`
+            }
+          }
+        }
+      }
+    });
+
+    // Extra visuals
+    renderHeatmap(subjectMap);
+    const allMarks = entries.map(e => Number(e.marks) || 0);
+    const avgVal = allMarks.length
+      ? allMarks.reduce((a,b) => a + b, 0) / allMarks.length
+      : 0;
+    renderGauge(avgVal);
+    renderStudyPlan(subjectAverages, subjects);
+  }
+
+  function renderHeatmap(subjectMap) {
+    heatmapGrid.innerHTML = '';
+    const subjects = Object.keys(subjectMap);
+    const maxCells = 18;
+
+    if (!subjects.length) {
+      for (let i = 0; i < 6; i++) {
+        const cell = document.createElement('div');
+        cell.className = 'hm-cell';
+        cell.textContent = '–';
+        heatmapGrid.appendChild(cell);
+      }
+      return;
+    }
+
+    subjects.slice(0, maxCells).forEach(s => {
+      const arr = subjectMap[s];
+      const avg = arr.reduce((a,b) => a + b, 0) / arr.length;
+      const color = heatmapColor(avg);
+      const cell = document.createElement('div');
+      cell.className = 'hm-cell';
+      cell.style.background = color;
+      cell.title = `${s}: ${avg.toFixed(1)}`;
+      cell.textContent = s.split(' ').map(w => w[0]).join('').slice(0,3).toUpperCase();
+      heatmapGrid.appendChild(cell);
+    });
+  }
+
+  function heatmapColor(val) {
+    // val 0->100 : red->green
+    const r = Math.min(255, Math.floor((100 - val) * 2.5));
+    const g = Math.min(255, Math.floor(val * 2.55));
+    return `rgba(${r},${g},80,0.85)`;
+  }
+
+  function renderGauge(value) {
+    const ctx = gaugeCanvas.getContext('2d');
+    ctx.clearRect(0,0,gaugeCanvas.width,gaugeCanvas.height);
+    const w = gaugeCanvas.width, h = gaugeCanvas.height;
+    const cx = w/2, cy = h*1.1;
+    const radius = Math.min(w,h);
+    const startAngle = Math.PI;
+    const endAngle = 0;
+
+    ctx.lineWidth = 14;
+    ctx.lineCap = 'round';
+
+    // background arc
+    ctx.beginPath();
+    ctx.strokeStyle = 'rgba(255,255,255,0.1)';
+    ctx.arc(cx, cy, radius*0.7, startAngle, endAngle);
+    ctx.stroke();
+
+    // foreground
+    const pct = Math.max(0, Math.min(1, value/100));
+    const ang = startAngle + (endAngle - startAngle)*pct;
+    const grad = ctx.createLinearGradient(0,0,w,0);
+    grad.addColorStop(0, '#FF6B6B');
+    grad.addColorStop(0.5, '#FFD66B');
+    grad.addColorStop(1, '#4EF08A');
+
+    ctx.beginPath();
+    ctx.strokeStyle = grad;
+    ctx.arc(cx, cy, radius*0.7, startAngle, ang);
+    ctx.stroke();
+
+    // needle
+    const nx = cx + Math.cos(ang)*radius*0.55;
+    const ny = cy + Math.sin(ang)*radius*0.55;
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.lineTo(nx, ny);
+    ctx.lineWidth = 2;
+    ctx.strokeStyle = 'rgba(255,255,255,0.9)';
+    ctx.stroke();
+
+    gaugeText.textContent = Math.round(value) + '/100';
+  }
+
+  function renderStudyPlan(subjectAverages, subjects) {
+    studyPlanDiv.innerHTML = '';
+    if (!subjects.length) {
+      studyPlanDiv.textContent = 'No data';
+      document.getElementById('studyPlanSummary').textContent = 'Study plan: —';
+      return;
+    }
+    const pairs = subjects.map((s, i) => ({subject: s, avg: subjectAverages[i]}))
+                          .sort((a,b) => a.avg - b.avg);
+    const slots = 6;
+    const plan = [];
+    for (let i = 0; i < slots; i++) {
+      const s = pairs[i % pairs.length];
+      const focus = Math.max(10, Math.round((60 - s.avg)/2));
+      plan.push({slot: i+1, subject: s.subject, focus});
+    }
+    plan.forEach(p => {
+      const row = document.createElement('div');
+      row.className = 'study-row';
+      row.innerHTML =
+        `<div class="muted-small">Slot ${p.slot} • ${p.subject}</div>` +
+        `<div style="font-weight:700;">${p.focus} min</div>`;
+      studyPlanDiv.appendChild(row);
+    });
+    document.getElementById('studyPlanSummary').textContent =
+      `Study plan: Focus more on ${pairs[0].subject}`;
+  }
+
+  // AI Suggest
+  suggestBtn.addEventListener('click', () => {
+    if (!activeProfileId) return toast('Create/select profile');
+    const prof = profiles[activeProfileId];
+    const entries = prof.entries || [];
+    if (!entries.length) return toast('Add some entries first');
+
+    const subjectMap = {};
+    entries.forEach(e => {
+      subjectMap[e.subject] = subjectMap[e.subject] || [];
+      subjectMap[e.subject].push(Number(e.marks) || 0);
+    });
+    let weakestSub = null, weakestAvg = 999;
+    Object.keys(subjectMap).forEach(s => {
+      const arr = subjectMap[s];
+      const avg = arr.reduce((a,b) => a+b,0) / arr.length;
+      if (avg < weakestAvg) {
+        weakestAvg = avg;
+        weakestSub = s;
+      }
+    });
+
+    const topics = prof.topics || [];
+    const weakTopic = topics.slice().sort((a,b) =>
+      (b.errorPercent || 0) - (a.errorPercent || 0)
+    )[0];
+
+    let suggestion = `Study ${weakestSub} next (avg ${weakestAvg.toFixed(1)})`;
+    if (weakTopic) {
+      suggestion += ` — focus on topic: ${weakTopic.topic} (err ${(weakTopic.errorPercent || 0).toFixed(1)}%)`;
+    }
+    aiSuggestionEl.textContent = suggestion;
+    toast('Suggestion ready');
+  });
+
+  // Compare
+  compareBtn.addEventListener('click', () => {
+    const a = compareA.value;
+    const b = compareB.value;
+    if (!a || !b) return toast('Select two profiles');
+    if (a === b) return toast('Choose two different profiles');
+    const pa = profiles[a];
+    const pb = profiles[b];
+    const avg = arr => arr.length
+      ? Math.round(arr.reduce((s, x) => s + Number(x.marks || 0), 0)/arr.length)
+      : 0;
+    const avga = avg(pa.entries || []);
+    const avgb = avg(pb.entries || []);
+    alert(`${pa.name}: avg ${avga}\n${pb.name}: avg ${avgb}`);
+  });
+
+  // EXPORT CSV
+  exportCsvBtn.addEventListener('click', () => {
+    if (!activeProfileId) return toast('Select profile');
+    const prof = profiles[activeProfileId];
+    const entries = prof.entries || [];
+    if (!entries.length) return toast('No entries to export');
+    let csv = 'exam,subject,marks,topic\n';
+    entries.forEach(e => {
+      const safeTopic = (e.topic || '').replace(/,/g, ' ');
+      csv += `${e.exam},${e.subject},${e.marks},${safeTopic}\n`;
+    });
+    const blob = new Blob([csv], {type:'text/csv'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${prof.name.replace(/\s+/g, '_')}_data.csv`;
+    a.click();
+    URL.revokeObjectURL(url);
+    toast('CSV exported');
+  });
+
+  // IMPORT
+  importBtn.addEventListener('click', () => importFile.click());
+  importFile.addEventListener('change', (e) => {
+    const f = e.target.files[0];
+    if (!f) return;
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      try {
+        const raw = ev.target.result;
+        if (f.type.includes('json') || raw.trim().startsWith('{')) {
+          const parsed = JSON.parse(raw);
+          if (parsed.profiles) {
+            pushUndo();
+            profiles = parsed.profiles;
+            activeProfileId = parsed.activeProfileId || Object.keys(profiles)[0];
+            saveState();
+            renderAll();
+            toast('Imported JSON profiles');
+          } else {
+            toast('JSON does not contain profiles');
+          }
+        } else {
+          // CSV import as a new profile
+          const lines = raw.split('\n').map(l => l.trim()).filter(Boolean);
+          const header = lines.shift().split(',');
+          const id = uid('p');
+          profiles[id] = {name: 'Imported', entries: [], topics: []};
+          lines.forEach(line => {
+            const parts = line.split(',');
+            profiles[id].entries.push({
+              id: uid('e'),
+              exam: parts[0],
+              subject: parts[1],
+              marks: Number(parts[2] || 0),
+              topic: parts[3] || ''
+            });
+          });
+          activeProfileId = id;
+          saveState();
+          renderAll();
+          toast('Imported CSV profile');
+        }
+      } catch (err) {
+        console.error(err);
+        toast('Import failed');
+      }
+    };
+    reader.readAsText(f);
+  });
+
+  // RENDER ALL
+  function renderAll() {
+    renderProfiles();
+    renderTable();
+    rebuildCharts();
+  }
+
+  // INIT
+  window.addEventListener('load', () => {
+    alert('Welcome to the Exam Performance Visualizer');
+  });
+
+  loadState();
+  if (!Object.keys(profiles).length) {
+    const id = uid('p');
+    profiles[id] = {
+      name: 'You',
+      entries: [
+        {id: uid('e'), exam: 'Sample Exam', subject: 'Maths', marks: 72, topic: 'Algebra'},
+        {id: uid('e'), exam: 'Sample Exam', subject: 'Physics', marks: 58, topic: 'Mechanics'},
+        {id: uid('e'), exam: 'Sample Exam', subject: 'Chemistry', marks: 85, topic: 'Organic'}
+      ],
+      topics: [
+        {id: uid('t'), exam: 'Sample Exam', topic: 'Algebra', errorPercent: 36},
+        {id: uid('t'), exam: 'Sample Exam', topic: 'Mechanics', errorPercent: 44}
+      ]
+    };
+    activeProfileId = id;
+    saveState();
+  }
+  renderAll();
+
+  // Shortcuts: Ctrl+Z (undo), Ctrl+S (CSV)
+  window.addEventListener('keydown', (e) => {
+    if ((e.ctrlKey || e.metaKey) && !e.shiftKey && e.key.toLowerCase() === 'z') {
+      e.preventDefault();
+      undoBtn.click();
+    }
+    if ((e.ctrlKey || e.metaKey) && !e.shiftKey && e.key.toLowerCase() === 's') {
+      e.preventDefault();
+      exportCsvBtn.click();
+    }
+  });
+</script>
+</body>
+</html>
