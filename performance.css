@@ -1,0 +1,82 @@
+:root {
+  --bg: #000000;
+  --card: #111111;
+  --muted: #e5e7eb;
+  --accent1: #0033cc;
+  --accent2: #00ff00;
+  --accent3: #ffff00;
+  --border-strong: #0066ff;
+  --glass: rgba(0, 102, 255, 0.12);
+}
+
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  background: #000000;
+  color: #ffffff;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  user-select: none;
+}
+
+header {
+  padding: 16px 24px;
+  border-bottom: 2px solid #ffffff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #0033cc;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/*... rest of the CSS rules from <style>...</style> in your file...*/
+
+footer {
+  padding: 8px 16px 14px;
+  font-size: 0.7rem;
+  color: #7b7b7b;
+  border-top: 1px solid #111111;
+  text-align: right;
+  background: #000000;
+}
+#topicPieChart {
+  max-width: 200px !important;
+  max-height: 200px !important;
+  width: 200px !important;
+  height: 200px !important;
+  margin: auto;
+  display: block;
+}
+/* Heatmap */
+.heatmap {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 6px;
+}
+.hm-cell {
+  height: 26px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #eee;
+  background: rgba(255,255,255,0.1);
+  box-shadow: 0 0 6px rgba(0,0,0,0.2) inset;
+  user-select: none;
+  cursor: default;
+}
+/*...and so on with every CSS rule as in your file...*/
