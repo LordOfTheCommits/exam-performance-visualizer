@@ -153,7 +153,6 @@
       font-family: "Algerian", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
 
-    /* NEW: all other headings use Algerian too */
     h2,
     h3,
     h4,
@@ -270,6 +269,12 @@
       align-items: end;
     }
 
+    @media(max-width:720px) {
+      .form-row {
+        grid-template-columns: 1fr 1fr
+      }
+    }
+
     @media(max-width:520px) {
       .form-row {
         grid-template-columns: 1fr 1fr
@@ -328,6 +333,9 @@
       color: #e5e7eb;
       cursor: pointer;
       transition: background .18s, border-color .18s, transform .08s;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
     }
 
     .btn-profile:hover {
@@ -340,6 +348,19 @@
       background: linear-gradient(90deg, #22c55e, #0ea5e9);
       color: #020617;
       border: none;
+    }
+
+    .profile-remove {
+      border: none;
+      background: transparent;
+      color: #e5e7eb;
+      font-size: 0.8rem;
+      padding: 0 2px;
+      cursor: pointer;
+    }
+
+    .profile-remove:hover {
+      color: #fecaca;
     }
 
     .profiles-bar {
@@ -494,7 +515,6 @@
       margin-top: 4px
     }
 
-    /* Footer font different from headings */
     footer {
       padding: 8px 16px 14px;
       font-size: .7rem;
@@ -695,7 +715,10 @@
         style="padding:6px 8px;box-shadow:none;border-color:rgba(148,163,184,0.7);background:rgba(15,23,42,0.98);">
         <div class="muted-small" style="margin-bottom:4px;">Profiles</div>
         <div id="profilesContainer" class="profiles-bar"></div>
-        <button class="btn" id="addProfileBtn" style="margin-top:3px;">+ Profile</button>
+        <div style="display:flex;gap:6px;margin-top:3px;flex-wrap:wrap;">
+          <button class="btn" id="addProfileBtn">+ Profile</button>
+          <button class="btn" id="removeActiveProfileBtn">Remove active profile</button>
+        </div>
         <div class="muted-small" style="margin-top:4px;">
           Active: <span id="activeProfileDisplay"></span>
         </div>
@@ -823,6 +846,7 @@
 
     const profilesContainer = document.getElementById('profilesContainer');
     const addProfileBtn = document.getElementById('addProfileBtn');
+    const removeActiveProfileBtn = document.getElementById('removeActiveProfileBtn');
     const activeProfileDisplay = document.getElementById('activeProfileDisplay');
     const exportCsvBtn = document.getElementById('exportCsvBtn');
     const importBtn = document.getElementById('importBtn');
@@ -958,8 +982,25 @@
         const btn = document.createElement('button');
         btn.className = 'btn-profile';
         if (id === activeProfileId) btn.classList.add('active');
-        btn.textContent = p.name; btn.onclick = () => setActiveProfile(id);
+
+        const labelSpan = document.createElement('span');
+        labelSpan.textContent = p.name;
+
+        const removeBtn = document.createElement('button');
+        removeBtn.className = 'profile-remove';
+        removeBtn.type = 'button';
+        removeBtn.textContent = '×';
+        removeBtn.title = 'Remove this profile';
+        removeBtn.addEventListener('click', (ev) => {
+          ev.stopPropagation();
+          removeProfile(id);
+        });
+
+        btn.appendChild(labelSpan);
+        btn.appendChild(removeBtn);
+        btn.addEventListener('click', () => setActiveProfile(id));
         profilesContainer.appendChild(btn);
+
         const optA = document.createElement('option');
         optA.value = id; optA.textContent = p.name; compareA.appendChild(optA);
         const optB = document.createElement('option');
@@ -968,13 +1009,37 @@
       activeProfileDisplay.textContent =
         activeProfileId && profiles[activeProfileId] ? profiles[activeProfileId].name : '';
     }
+
     function setActiveProfile(id) { activeProfileId = id; saveState(); renderAll(); }
+
+    function removeProfile(id) {
+      if (!profiles[id]) return;
+      const isActive = id === activeProfileId;
+      if (!confirm('Remove this profile permanently?')) return;
+      pushUndo();
+      delete profiles[id];
+      const remainingIds = Object.keys(profiles);
+      if (!remainingIds.length) {
+        activeProfileId = null;
+      } else if (isActive) {
+        activeProfileId = remainingIds[0];
+      }
+      saveState();
+      renderAll();
+      toast('Profile removed');
+    }
+
     addProfileBtn.addEventListener('click', () => {
       const name = prompt('Profile name (student, e.g. Ashif Student)');
       if (!name) return;
       const id = uid('p');
       profiles[id] = { name, entries: [], topics: [] };
       activeProfileId = id; saveState(); renderAll(); toast('Profile added');
+    });
+
+    removeActiveProfileBtn.addEventListener('click', () => {
+      if (!activeProfileId) return toast('No active profile to remove');
+      removeProfile(activeProfileId);
     });
 
     function currentEntries() { return activeProfileId && profiles[activeProfileId] ? profiles[activeProfileId].entries : []; }
@@ -1332,10 +1397,6 @@
       gaugeText.textContent = Math.round(value) + '/100';
     }
 
-    // NEW STUDY PLAN LOGIC:
-    // Weak (avg < 40)   -> 120 min
-    // Average (40-74)   -> 60 min
-    // Strong (>= 75)    -> 45 min
     function renderStudyPlan(subjectAverages, subjects) {
       studyPlanDiv.innerHTML = '';
       const summaryEl = document.getElementById('studyPlanSummary');
